@@ -153,10 +153,12 @@ package goplayer
       onclick(largePlayButton, handlePlayButtonClicked)
       onclick(popupBackground, handlePopupBackgroundClicked)
 
+      onclick(closeShareButton, hidePopups)
       onclick(copyShareLinkButton, handleCopyShareLinkButtonClicked)
       onclick(twitterButton, handleTwitterButtonClicked)
       onclick(facebookButton, handleFacebookButtonClicked)
-
+      
+      onclick(closeEmbedButton, hidePopups)
       onclick(copyEmbedCodeButton, handleCopyEmbedCodeButtonClicked)
 
       onrollover(chrome, handleChromeRollOver)
@@ -315,6 +317,8 @@ package goplayer
 
     protected function get sharePopup() : InteractiveObject
     { return undefinedPart("sharePopup") }
+    protected function get closeShareButton() :DisplayObject
+    { return undefinedPart("closeShareButton") }
     protected function get shareLinkField() : TextField
     { return undefinedPart("shareLinkField") }
     protected function get copyShareLinkButton() : DisplayObject
@@ -328,6 +332,8 @@ package goplayer
 
     protected function get embedPopup() : InteractiveObject
     { return undefinedPart("embedPopup") }
+    protected function get closeEmbedButton() :DisplayObject
+    { return undefinedPart("closeEmbedButton") }
     protected function get embedCodeField() : TextField
     { return undefinedPart("embedCodeField") }
     protected function get copyEmbedCodeButton() : DisplayObject

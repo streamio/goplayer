@@ -147,7 +147,9 @@ package goplayer
     { return lookup("sharePopup") }
     override protected function get embedPopup() : InteractiveObject
     { return lookup("embedPopup") }
-
+  
+    override protected function get closeShareButton() : DisplayObject
+    { return lookup("sharePopup.closeButton") }
     override protected function get shareLinkField() : TextField
     { return lookup("sharePopup.linkField") }
     override protected function get copyShareLinkButton() : DisplayObject
@@ -158,7 +160,9 @@ package goplayer
     { return lookup("sharePopup.twitterButton") }
     override protected function get facebookButton() : DisplayObject
     { return lookup("sharePopup.facebookButton") }
-
+  
+    override protected function get closeEmbedButton() : DisplayObject
+    { return lookup("embedPopup.closeButton") }
     override protected function get embedCodeField() : TextField
     { return lookup("embedPopup.codeField") }
     override protected function get copyEmbedCodeButton() : DisplayObject
