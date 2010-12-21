@@ -19,6 +19,9 @@ package goplayer
 
     public function get halved() : Dimensions
     { return scaledBy(.5) }
+    
+    public function get quarter() : Dimensions
+    { return scaledBy(.25) }
 
     public function scaledBy(scalar : Number) : Dimensions
     { return new Dimensions(width * scalar, height * scalar) }
