@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Streamio GoPlayer Demo</title>
+    <meta charset="utf-8">
+    <link href="goplayer-demo.css" rel="stylesheet">
+    <script src="swfobject.js"></script>
+    <script src="goplayer-demo.js"></script>
+    <script>
+      swfobject.addDomLoadEvent(function () {
+        var params = { allowfullscreen: true }
+        var flashvars = {
+          src: "streamio:video:4d2345221ee3ba35020001d1",
+          "external-logging-function": "goplayer_demo_log",
+          "skin": "goplayer-black-skin.swf"
+        }
+
+        goplayer_demo_parse_query_string(location.search, flashvars)
+
+        swfobject.embedSWF
+          ("goplayer.swf", "player", 800, 450,
+           "9.0.0", null, flashvars, params)
+      })
+    </script>
+  </head>
+  <body>
+    <div id="player-container">
+    <div id="player"></div>
+    </div>
+    <div id="log-container">
+    <ul id="log"></ul>
+    </div>
+  </body>
+</html>

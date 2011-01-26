@@ -1,0 +1,46 @@
+= Go Player (streamio fork)
+
+This is the streamio fork of the open source flash video player Go Player.
+It's technically very similar to the original but some effort has gone into
+cleaning up the source tree and making it more user friendly for less
+advanced users.
+
+== Get up an running
+
+You'll be working with the goplayer FLA file found in the src directory and 
+the skin FLA files found in the skin-src dir.
+
+SWF files are exported into the example directory where you'll also find
+the index.html file containing an example of how to publish your player.
+
+Beware that running the index file locally might not play well with Flash
+security settings so you might have better luck running the files from
+a real web server.
+
+If you want to test your player from inside of flash please override
+some configuration settings in src/goplayer/ConfigurationParser.as to
+avoid having to configure the player from an html file. The frame
+script in goplayer.fla has some notes on this as well.
+
+== Source Tree Overview
+
+=== example/
+
+The kind of files you'll want to deploy to your web server.
+
+=== src/
+
+GoPlayer FLA file and the source code to run it.
+
+=== skin-src/
+
+Skin FLA files and the code needed to run them.
+
+=== skin-interface/
+
+The interfaces used for player-skin-communication.
+
+=== lib/
+
+Generic utility functions and classes, used in both the player engine code
+and the skin code.

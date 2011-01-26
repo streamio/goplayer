@@ -44,13 +44,13 @@ package goplayer
 
     public function execute() : void
     {
-      result.skinURL = "goplayer-black-skin.swf" //getString("skin", DEFAULT_SKIN_URL)
-      result.movieID = "4ceba24cb35ea857d9000010" //getStreamioVideoID()
+      result.skinURL = getString("skin", DEFAULT_SKIN_URL)
+      result.movieID = getStreamioVideoID()
       result.bitratePolicy = getBitratePolicy("bitrate", BitratePolicy.BEST)
       result.enableRTMP = getBoolean("enablertmp", true)
       result.enableAutoplay = getBoolean("autoplay", false)
       result.enableLooping = getBoolean("loop", false)
-      result.externalLoggingFunctionName = "goplayer.log" //getString("externalloggingfunction", "")
+      result.externalLoggingFunctionName = getString("externalloggingfunction", "")
 
       result.enableChrome
         = getBoolean("skinshowchrome", true)
