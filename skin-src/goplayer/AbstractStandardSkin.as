@@ -155,8 +155,8 @@ package goplayer
 
       onclick(closeShareButton, hidePopups)
       onclick(copyShareLinkButton, handleCopyShareLinkButtonClicked)
-      onclick(twitterButton, handleTwitterButtonClicked)
-      onclick(facebookButton, handleFacebookButtonClicked)
+      // onclick(twitterButton, handleTwitterButtonClicked)
+      // onclick(facebookButton, handleFacebookButtonClicked)
       
       onclick(closeEmbedButton, hidePopups)
       onclick(copyEmbedCodeButton, handleCopyEmbedCodeButtonClicked)
