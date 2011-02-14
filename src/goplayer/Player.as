@@ -9,7 +9,7 @@ package goplayer
     private const START_BUFFER : Duration = Duration.seconds(3)
     private const SMALL_BUFFER : Duration = Duration.seconds(5)
     private const LARGE_BUFFER : Duration = Duration.seconds(60)
-    private const SEEK_GRACE_TIME : Duration = Duration.seconds(2)
+    private const SEEK_GRACE_TIME : Duration = Duration.seconds(1)
 
     private var connection : FlashNetConnection
     private var _movie : Movie
