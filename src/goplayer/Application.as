@@ -5,12 +5,9 @@ package goplayer
   public class Application extends Component
     implements ISkinSWFLoaderListener, IMovieHandler, IPlayerListener
   {
-    private const background : Background
-      = new Background(0x000000, 1)
-    private const contentLayer : Component
-      = new Component
-    private const debugLayer : Component
-      = new EphemeralComponent
+    private const background : Background = new Background(0x000000, 1)
+    private const contentLayer : Component = new Component
+    private const debugLayer : Component = new EphemeralComponent
 
     private var configuration : Configuration
 
@@ -31,10 +28,7 @@ package goplayer
         // Parse the parameters again for logging purposes.
         installLogger(), ConfigurationParser.parse(parameters)
 
-      api = new StreamioAPI
-        (configuration.apiURL,
-         new StandardHTTP,
-         configuration.trackerID)
+      api = new StreamioAPI(configuration.apiURL, new StandardHTTP, configuration.trackerID)
 
       addChild(background)
       addChild(contentLayer)
@@ -127,8 +121,7 @@ package goplayer
 
     private function get viewConfiguration() : SkinnedPlayerViewConfiguration
     {
-      const result : SkinnedPlayerViewConfiguration
-        = new SkinnedPlayerViewConfiguration
+      const result : SkinnedPlayerViewConfiguration = new SkinnedPlayerViewConfiguration
 
       result.skin = skinSWF.getSkin()
       result.enableChrome = configuration.enableChrome
