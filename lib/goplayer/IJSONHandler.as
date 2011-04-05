@@ -1,5 +1,5 @@
 package goplayer
 {
-  public interface JSONHandler
+  public interface IJSONHandler
   { function handleJSON(value : Object) : void }
 }

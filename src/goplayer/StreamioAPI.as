@@ -5,11 +5,10 @@ package goplayer
     private static const VERSION : String = "/v1"
 
     private var baseURL : String
-    private var http : HTTP
+    private var http : IHTTP
     private var trackerID : String
 
-    public function StreamioAPI
-      (baseURL : String, http : HTTP, trackerID : String)
+    public function StreamioAPI(baseURL : String, http : IHTTP, trackerID : String)
     {
       this.baseURL = baseURL
       this.http = http
@@ -18,8 +17,7 @@ package goplayer
 
     // -----------------------------------------------------
 
-    public function fetchMovie
-      (id : String, handler : IMovieHandler) : void
+    public function fetchMovie(id : String, handler : IMovieHandler) : void
     { fetch(getJSONMoviePath(id), new MovieJSONHandler(handler, this)) }
 
     public function getShareMovieURL(id : String) : URL
@@ -31,19 +29,16 @@ package goplayer
     public function reportMoviePlayed(movieID : String) : void
     { reportMovieEvent(movieID, "plays", {}) }
     
-    public function reportMovieHeatmapData
-      (movieID : String, time : Number) : void
+    public function reportMovieHeatmapData(movieID : String, time : Number) : void
     { reportMovieEvent(movieID, "heat", { time: time }) }
 
-    private function reportMovieEvent
-      (movieID : String, event : String, parameters : Object) : void
+    private function reportMovieEvent(movieID : String, event : String, parameters : Object) : void
     {
       if (trackerID != null && trackerID != "")
         post(statsPath, getStatsParameters(movieID, event, parameters))
     }
 
-    private function getStatsParameters
-      (movieID : String, event : String, parameters : Object) : Object
+    private function getStatsParameters(movieID : String, event : String, parameters : Object) : Object
     {
       const result : Object = new Object
 
@@ -70,7 +65,7 @@ package goplayer
 
     // -----------------------------------------------------
 
-    private function fetch(path : String, handler : JSONHandler) : void
+    private function fetch(path : String, handler : IJSONHandler) : void
     { http.fetch(getURL(path), new JSONAdapter(handler)) }
 
     private function post(path : String, parameters : Object) : void
@@ -85,11 +80,11 @@ import com.adobe.serialization.json.JSON
 
 import goplayer.*
 
-class JSONAdapter implements HTTPResponseHandler
+class JSONAdapter implements IHTTPResponseHandler
 {
-  private var handler : JSONHandler
+  private var handler : IJSONHandler
 
-  public function JSONAdapter(handler : JSONHandler)
+  public function JSONAdapter(handler : IJSONHandler)
   { this.handler = handler }
 
   public function handleHTTPResponse(text : String) : void
@@ -99,7 +94,7 @@ class JSONAdapter implements HTTPResponseHandler
   { debug("Error: HTTP request failed: " + message) }
 }
 
-class MovieJSONHandler implements JSONHandler
+class MovieJSONHandler implements IJSONHandler
 {
   private var handler : IMovieHandler
   private var api : StreamioAPI
@@ -112,7 +107,7 @@ class MovieJSONHandler implements JSONHandler
   { handler.handleMovie(new StreamioMovie(json, api)) }
 }
 
-class NullHTTPHandler implements HTTPResponseHandler
+class NullHTTPHandler implements IHTTPResponseHandler
 {
   public function handleHTTPResponse(text : String) : void {}
   public function handleHTTPError(message : String) : void {}

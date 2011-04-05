@@ -12,10 +12,9 @@ package goplayer
 
     private var url : URL
     private var parameters : Object
-    private var handler : HTTPResponseHandler
+    private var handler : IHTTPResponseHandler
 
-    public function HTTPPostAttempt
-      (url : URL, parameters : Object, handler : HTTPResponseHandler)
+    public function HTTPPostAttempt(url : URL, parameters : Object, handler : IHTTPResponseHandler)
     {
       this.url = url
       this.parameters = parameters

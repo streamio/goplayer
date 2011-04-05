@@ -10,10 +10,9 @@ package goplayer
     private const loader : URLLoader = new URLLoader
 
     private var url : URL
-    private var handler : HTTPResponseHandler
+    private var handler : IHTTPResponseHandler
 
-    public function HTTPFetchAttempt
-      (url : URL, handler : HTTPResponseHandler)
+    public function HTTPFetchAttempt(url : URL, handler : IHTTPResponseHandler)
     { this.url = url, this.handler = handler }
 
     public function execute() : void
