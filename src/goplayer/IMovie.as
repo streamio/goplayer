@@ -1,6 +1,6 @@
 package goplayer
 {
-  public interface Movie
+  public interface IMovie
   {
     function get id() : String
     function get title() : String

@@ -1,2 +1,2 @@
 package goplayer
-{ public var debugLogger : Logger = new NullLogger }
+{ public var debugLogger : ILogger = new NullLogger }

@@ -6,13 +6,13 @@ package goplayer
   import flash.net.NetConnection
   import flash.net.NetStream
 
-  public class StandardFlashNetConnection implements FlashNetConnection
+  public class StandardFlashNetConnection implements IFlashNetConnection
   {
     private const connection : NetConnection = new NetConnection
 
     private var video : Video
 
-    private var _listener : FlashNetConnectionListener
+    private var _listener : IFlashNetConnectionListener
 
     private var dummy : Boolean = false
     private var serverVersion : Number = 0
@@ -28,7 +28,7 @@ package goplayer
       connection.client = { onBWCheck: onBWCheck, onBWDone: onBWDone }
     }
 
-    public function set listener(value : FlashNetConnectionListener) : void
+    public function set listener(value : IFlashNetConnectionListener) : void
     { _listener = value }
 
     public function connect(url : URL) : void
@@ -71,7 +71,7 @@ package goplayer
       _listener.handleBandwidthDetermined(bandwidth, latency)
     }
 
-    public function getNetStream() : FlashNetStream
+    public function getNetStream() : IFlashNetStream
     { return new StandardFlashNetStream(connection, video) }
 
     private function handleNetConnectionStatus(event : NetStatusEvent) : void

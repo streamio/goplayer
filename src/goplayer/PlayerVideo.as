@@ -47,7 +47,7 @@ package goplayer
     }
 
     public function addUpdateListener
-      (value : PlayerVideoUpdateListener) : void
+      (value : IPlayerVideoUpdateListener) : void
     { listeners.push(value) }
 
     private function handleAddedToStage(event : Event) : void
@@ -92,7 +92,7 @@ package goplayer
       if (stage && USE_FULL_SCREEN_SOURCE_RECT)
         stage.fullScreenSourceRect = fullScreenSourceRect
 
-      for each (var listener : PlayerVideoUpdateListener in listeners)
+      for each (var listener : IPlayerVideoUpdateListener in listeners)
         listener.handlePlayerVideoUpdated()
     }
 

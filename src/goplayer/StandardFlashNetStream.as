@@ -10,12 +10,12 @@ package goplayer
   import flash.media.Video
   import flash.net.NetConnection
 
-  public class StandardFlashNetStream implements FlashNetStream
+  public class StandardFlashNetStream implements IFlashNetStream
   {
     private var stream : DynamicStream
     private var video : Video
 
-    private var _listener : FlashNetStreamListener
+    private var _listener : IFlashNetStreamListener
     private var lastCurrentTime : Duration = null
 
     public function StandardFlashNetStream
@@ -93,10 +93,10 @@ package goplayer
 
     // -----------------------------------------------------
 
-    public function set listener(value : FlashNetStreamListener) : void
+    public function set listener(value : IFlashNetStreamListener) : void
     { _listener = value }
 
-    public function playRTMP(stream : RTMPStream, streams : Array) : void
+    public function playRTMP(stream : IRTMPStream, streams : Array) : void
     {
       debug("Playing " + formatRTMPStream(stream) + ".")
       debug("Stream name: <" + stream.name + ">")
@@ -104,7 +104,7 @@ package goplayer
       this.stream.startPlay(getDynamicStreamItem(stream, streams))
     }
 
-    private function formatRTMPStream(stream : RTMPStream) : String
+    private function formatRTMPStream(stream : IRTMPStream) : String
     { return stream.bitrate + " " + stream.dimensions + " RTMP stream" }
 
     public function playHTTP(url : URL) : void
@@ -114,11 +114,11 @@ package goplayer
     }
 
     private function getDynamicStreamItem
-      (stream : RTMPStream, streams : Array) : DynamicStreamItem
+      (stream : IRTMPStream, streams : Array) : DynamicStreamItem
     {
       const result : DynamicStreamItem = new DynamicStreamItem
 
-      for each (var stream : RTMPStream in streams)
+      for each (var stream : IRTMPStream in streams)
         result.addStream(stream.name, stream.bitrate.kbps)
 
       result.startRate = stream.bitrate.kbps

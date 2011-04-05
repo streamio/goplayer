@@ -1,5 +1,5 @@
 package goplayer
 {
-  public interface PlayerVideoUpdateListener
+  public interface IPlayerVideoUpdateListener
   { function handlePlayerVideoUpdated() : void }
 }

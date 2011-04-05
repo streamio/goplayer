@@ -3,11 +3,11 @@ package goplayer
 	import flash.display.DisplayObject
 	import flash.display.Sprite
 
-  public class AbstractSkin extends Component implements Skin
+  public class AbstractSkin extends Component implements ISkin
   {
-    private var _backend : SkinBackend = null
+    private var _backend : ISkinBackend = null
 
-    public function set backend(value : SkinBackend) : void
+    public function set backend(value : ISkinBackend) : void
     { _backend = value }
 
     public function get frontend() : DisplayObject
@@ -31,7 +31,7 @@ package goplayer
 
     // -----------------------------------------------------
 
-    public function get backend() : SkinBackend
+    public function get backend() : ISkinBackend
     { return _backend }
 
     protected function get titleText() : String

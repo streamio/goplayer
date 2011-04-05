@@ -2,7 +2,7 @@ package goplayer
 {
   public class SkinnedPlayerViewConfiguration
   {
-    public var skin : Skin
+    public var skin : ISkin
     public var enableChrome : Boolean
     public var enableTitle : Boolean
     public var enableShareButton : Boolean

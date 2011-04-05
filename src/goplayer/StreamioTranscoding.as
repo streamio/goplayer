@@ -1,6 +1,6 @@
 package goplayer
 {
-  public class StreamioTranscoding implements RTMPStream
+  public class StreamioTranscoding implements IRTMPStream
   {
     private var json : Object
 

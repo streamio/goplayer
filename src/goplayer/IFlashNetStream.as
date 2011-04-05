@@ -2,11 +2,11 @@ package goplayer
 {
   import flash.media.Video
 
-  public interface FlashNetStream
+  public interface IFlashNetStream
   {
-    function set listener(value : FlashNetStreamListener) : void
+    function set listener(value : IFlashNetStreamListener) : void
 
-    function playRTMP(stream : RTMPStream, streams : Array) : void
+    function playRTMP(stream : IRTMPStream, streams : Array) : void
     function playHTTP(url : URL) : void
 
     function get httpFileSize() : Bitsize

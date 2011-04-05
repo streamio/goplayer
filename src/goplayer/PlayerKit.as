@@ -5,7 +5,7 @@ package goplayer
   public class PlayerKit
   {
     private const flashVideo : Video = new Video
-    private const connection : FlashNetConnection
+    private const connection : IFlashNetConnection
       = new StandardFlashNetConnection(flashVideo)
     private const sharedVolumeVariable : SharedVariable
       = new SharedVariable("player", "volume")
@@ -14,10 +14,10 @@ package goplayer
     public var video : PlayerVideo
 
     public function PlayerKit
-      (movie : Movie,
+      (movie : IMovie,
        bitratePolicy : BitratePolicy,
        enableRTMP : Boolean,
-       reporter : MovieEventReporter,
+       reporter : IMovieEventReporter,
        dimensions : Dimensions)
     {
       player = new Player

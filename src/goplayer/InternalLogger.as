@@ -7,7 +7,7 @@ package goplayer
   import flash.text.TextFieldAutoSize
   import flash.text.TextFormat
 
-  public class InternalLogger extends Component implements Logger
+  public class InternalLogger extends Component implements ILogger
   {
     private const MARGIN : Number = 5
     private const lines : Array = []

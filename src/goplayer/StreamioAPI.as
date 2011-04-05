@@ -1,6 +1,6 @@
 package goplayer
 {
-  public class StreamioAPI implements MovieEventReporter
+  public class StreamioAPI implements IMovieEventReporter
   {
     private static const VERSION : String = "/v1"
 
@@ -19,7 +19,7 @@ package goplayer
     // -----------------------------------------------------
 
     public function fetchMovie
-      (id : String, handler : MovieHandler) : void
+      (id : String, handler : IMovieHandler) : void
     { fetch(getJSONMoviePath(id), new MovieJSONHandler(handler, this)) }
 
     public function getShareMovieURL(id : String) : URL
@@ -101,11 +101,11 @@ class JSONAdapter implements HTTPResponseHandler
 
 class MovieJSONHandler implements JSONHandler
 {
-  private var handler : MovieHandler
+  private var handler : IMovieHandler
   private var api : StreamioAPI
 
   public function MovieJSONHandler
-    (handler : MovieHandler, api : StreamioAPI)
+    (handler : IMovieHandler, api : StreamioAPI)
   { this.handler = handler, this.api = api }
   
   public function handleJSON(json : Object) : void

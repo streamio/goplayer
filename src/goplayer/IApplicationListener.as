@@ -1,6 +1,6 @@
 package goplayer
 {
-  public interface ApplicationListener
+  public interface IApplicationListener
   {
     function handleCurrentTimeChanged() : void
     function handlePlaybackEnded() : void

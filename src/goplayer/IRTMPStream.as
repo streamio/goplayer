@@ -1,6 +1,6 @@
 package goplayer
 {
-  public interface RTMPStream
+  public interface IRTMPStream
   {
     function get name() : String
     function get bitrate() : Bitrate

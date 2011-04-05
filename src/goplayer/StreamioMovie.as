@@ -1,7 +1,6 @@
 package goplayer
 {
-  public class StreamioMovie
-    implements Movie
+  public class StreamioMovie implements IMovie
   {
     private var json : Object
     private var api : StreamioAPI

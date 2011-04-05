@@ -3,7 +3,7 @@ package goplayer
   import flash.ui.Keyboard
 
   public class Application extends Component
-    implements SkinSWFLoaderListener, MovieHandler, PlayerListener
+    implements ISkinSWFLoaderListener, IMovieHandler, IPlayerListener
   {
     private const background : Background
       = new Background(0x000000, 1)
@@ -16,12 +16,12 @@ package goplayer
 
     private var api : StreamioAPI
 
-    private var skinSWF : SkinSWF = null
-    private var movie : Movie = null
+    private var skinSWF : ISkinSWF = null
+    private var movie : IMovie = null
     private var player : Player = null
     private var view : Component = null
 
-    private var _listener : ApplicationListener = null
+    private var _listener : IApplicationListener = null
 
     public function Application(parameters : Object)
     {
@@ -41,7 +41,7 @@ package goplayer
       addChild(debugLayer)
     }
 
-    public function set listener(value : ApplicationListener) : void
+    public function set listener(value : IApplicationListener) : void
     { _listener = value }
 
     private function installLogger() : void
@@ -63,7 +63,7 @@ package goplayer
     private function loadSkin() : void
     { new SkinSWFLoader(configuration.skinURL, this).execute() }
 
-    public function handleSkinSWFLoaded(swf : SkinSWF) : void
+    public function handleSkinSWFLoaded(swf : ISkinSWF) : void
     {
       skinSWF = swf
       lookUpMovie()
@@ -75,7 +75,7 @@ package goplayer
       api.fetchMovie(configuration.movieID, this)
     }
 
-    public function handleMovie(movie : Movie) : void
+    public function handleMovie(movie : IMovie) : void
     {
       this.movie = movie
 
@@ -93,7 +93,7 @@ package goplayer
 
       const bitrates : Array = []
 
-      for each (var stream : RTMPStream in movie.rtmpStreams)
+      for each (var stream : IRTMPStream in movie.rtmpStreams)
         bitrates.push(stream.bitrate)
 
       if (bitrates.length == 0)

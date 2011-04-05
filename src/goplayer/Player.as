@@ -1,8 +1,6 @@
 package goplayer
 {
-  public class Player implements
-    FlashNetConnectionListener,
-    FlashNetStreamListener
+  public class Player implements IFlashNetConnectionListener, IFlashNetStreamListener
   {
     private const DEFAULT_VOLUME : Number = .8
 
@@ -11,11 +9,11 @@ package goplayer
     private const LARGE_BUFFER : Duration = Duration.seconds(60)
     private const SEEK_GRACE_TIME : Duration = Duration.seconds(1)
 
-    private var connection : FlashNetConnection
-    private var _movie : Movie
+    private var connection : IFlashNetConnection
+    private var _movie : IMovie
     private var bitratePolicy : BitratePolicy
     private var enableRTMP : Boolean
-    private var reporter : MovieEventReporter
+    private var reporter : IMovieEventReporter
     private var sharedVolumeVariable : SharedVariable
     private var shareEmbed : ShareEmbed
 
@@ -23,12 +21,12 @@ package goplayer
     private var _finished : Boolean = false
     private var triedStandardRTMP : Boolean = false
     private var _usingRTMP : Boolean = false
-    private var _listener : PlayerListener = null
+    private var _listener : IPlayerListener = null
 
     private var measuredBandwidth : Bitrate = null
     private var measuredLatency : Duration = null
 
-    private var stream : FlashNetStream = null
+    private var stream : IFlashNetStream = null
     private var metadata : Object = null
 
     private var _volume : Number = NaN
@@ -38,11 +36,11 @@ package goplayer
     private var seekStopwatch : Stopwatch = new Stopwatch
 
     public function Player
-      (connection : FlashNetConnection,
-       movie : Movie,
+      (connection : IFlashNetConnection,
+       movie : IMovie,
        bitratePolicy : BitratePolicy,
        enableRTMP : Boolean,
-       reporter : MovieEventReporter,
+       reporter : IMovieEventReporter,
        sharedVolumeVariable : SharedVariable,
        shareEmbed : ShareEmbed)
     {
@@ -64,10 +62,10 @@ package goplayer
         volume = DEFAULT_VOLUME
     }
 
-    public function get movie() : Movie
+    public function get movie() : IMovie
     { return _movie }
 
-    public function set listener(value : PlayerListener) : void
+    public function set listener(value : IPlayerListener) : void
     { _listener = value }
 
     public function get started() : Boolean
@@ -177,7 +175,7 @@ package goplayer
       useStartBuffer()
 
       if (usingRTMP)
-        playRTMPStream()
+        playIRTMPStream()
       else
         playHTTPStream()
 
@@ -185,7 +183,7 @@ package goplayer
         stream.paused = true
     }
 
-    private function playRTMPStream() : void
+    private function playIRTMPStream() : void
     { stream.playRTMP(streamPicker.first, streamPicker.all) }
 
     private function playHTTPStream() : void
@@ -445,7 +443,7 @@ package goplayer
     {
       var result : Dimensions = Dimensions.ZERO
 
-      for each (var stream : RTMPStream in movie.rtmpStreams)
+      for each (var stream : IRTMPStream in movie.rtmpStreams)
         if (stream.dimensions.isGreaterThan(result))
           result = stream.dimensions
 

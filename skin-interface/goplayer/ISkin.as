@@ -2,9 +2,9 @@ package goplayer
 {
   import flash.display.DisplayObject
 
-  public interface Skin
+  public interface ISkin
   {
-    function set backend(value : SkinBackend) : void
+    function set backend(value : ISkinBackend) : void
     function get frontend() : DisplayObject
     function update() : void
   }

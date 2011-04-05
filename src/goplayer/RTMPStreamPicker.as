@@ -19,7 +19,7 @@ package goplayer
       this.bandwidth = bandwidth
     }
 
-    public function get first() : RTMPStream
+    public function get first() : IRTMPStream
     {
       if (policy == BitratePolicy.MAX)
         return highEndStream
@@ -34,33 +34,33 @@ package goplayer
     public function get all() : Array
     { return policy == BitratePolicy.BEST ? streams : [first] }
 
-    private function get lowEndStream() : RTMPStream
+    private function get lowEndStream() : IRTMPStream
     {
-      var result : RTMPStream = streams[0]
+      var result : IRTMPStream = streams[0]
 
-      for each (var stream : RTMPStream in streams)
+      for each (var stream : IRTMPStream in streams)
         if (stream.bitrate.isLessThan(result.bitrate))
           result = stream
 
       return result
     }
 
-    private function get highEndStream() : RTMPStream
+    private function get highEndStream() : IRTMPStream
     {
-      var result : RTMPStream = streams[0]
+      var result : IRTMPStream = streams[0]
 
-      for each (var stream : RTMPStream in streams)
+      for each (var stream : IRTMPStream in streams)
         if (stream.bitrate.isGreaterThan(result.bitrate))
           result = stream
 
       return result
     }
 
-    private function get bestStream() : RTMPStream
+    private function get bestStream() : IRTMPStream
     {
-      var result : RTMPStream = lowEndStream
+      var result : IRTMPStream = lowEndStream
 
-      for each (var stream : RTMPStream in goodStreams)
+      for each (var stream : IRTMPStream in goodStreams)
         if (stream.bitrate.isGreaterThan(result.bitrate))
           result = stream
 
@@ -74,7 +74,7 @@ package goplayer
     {
       const result : Array = []
 
-      for each (var stream : RTMPStream in streams)
+      for each (var stream : IRTMPStream in streams)
         if (stream.bitrate.isLessThan(maxBitrate))
           result.push(stream)
 
@@ -84,11 +84,11 @@ package goplayer
     private function get maxBitrate() : Bitrate
     { return bandwidth.scaledBy(BANDWIDTH_FRACTION) }
 
-    private function get specificStream() : RTMPStream
+    private function get specificStream() : IRTMPStream
     {
-      var result : RTMPStream = lowEndStream
+      var result : IRTMPStream = lowEndStream
 
-      for each (var stream : RTMPStream in streams)
+      for each (var stream : IRTMPStream in streams)
         if (!stream.bitrate.isGreaterThan(policy.bitrate)
             && stream.bitrate.isGreaterThan(result.bitrate))
           result = stream

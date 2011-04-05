@@ -11,10 +11,10 @@ package goplayer
     private const loader : Loader = new Loader
 
     private var url : String
-    private var listener : FlashContentLoaderListener
+    private var listener : IFlashContentLoaderListener
 
     public function FlashContentLoadAttempt
-      (url : String, listener : FlashContentLoaderListener)
+      (url : String, listener : IFlashContentLoaderListener)
     {
       this.url = url, this.listener = listener
 

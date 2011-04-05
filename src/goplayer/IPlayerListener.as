@@ -1,6 +1,6 @@
 package goplayer
 {
-  public interface PlayerListener
+  public interface IPlayerListener
   { 
     function handleMovieFinishedPlaying() : void
     function handleCurrentTimeChanged() : void

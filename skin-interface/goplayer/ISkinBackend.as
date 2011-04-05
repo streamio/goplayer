@@ -1,6 +1,6 @@
 package goplayer
 {
-  public interface SkinBackend
+  public interface ISkinBackend
   {
     function get skinWidth() : Number
     function get skinHeight() : Number

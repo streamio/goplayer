@@ -1,6 +1,6 @@
 package goplayer
 {
-  public interface FlashNetStreamListener
+  public interface IFlashNetStreamListener
   {
     function handleNetStreamMetadata(data : Object) : void
     function handleStreamingStarted() : void

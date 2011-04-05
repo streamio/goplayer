@@ -2,6 +2,6 @@ package goplayer
 {
   import flash.display.LoaderInfo
 
-  public interface FlashContentLoaderListener
+  public interface IFlashContentLoaderListener
   { function handleContentLoaded(info : LoaderInfo) : void }
 }

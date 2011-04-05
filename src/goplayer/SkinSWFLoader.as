@@ -4,15 +4,15 @@ package goplayer
   import flash.utils.describeType
   import flash.utils.getQualifiedClassName
 
-  public class SkinSWFLoader implements FlashContentLoaderListener
+  public class SkinSWFLoader implements IFlashContentLoaderListener
   {
     private var url : String
-    private var listener : SkinSWFLoaderListener
+    private var listener : ISkinSWFLoaderListener
 
     private var info : LoaderInfo
 
     public function SkinSWFLoader
-      (url : String, listener : SkinSWFLoaderListener)
+      (url : String, listener : ISkinSWFLoaderListener)
     { this.url = url, this.listener = listener }
 
     public function execute() : void
@@ -25,10 +25,10 @@ package goplayer
     {
       this.info = info
 
-      if (!(info.content is SkinSWF))
+      if (!(info.content is ISkinSWF))
         reportTypeMismatch()
       else
-        handleSkinSWFLoaded(SkinSWF(info.content))
+        handleSkinSWFLoaded(ISkinSWF(info.content))
     }
 
     private function reportTypeMismatch() : void
@@ -69,9 +69,9 @@ package goplayer
     }
 
     private function get expectedInterfaceName() : String
-    { return getQualifiedClassName(SkinSWF) }
+    { return getQualifiedClassName(ISkinSWF) }
 
-    private function handleSkinSWFLoaded(swf : SkinSWF) : void
+    private function handleSkinSWFLoaded(swf : ISkinSWF) : void
     {
       debug("Skin SWF loaded successfully.")
       listener.handleSkinSWFLoaded(swf)

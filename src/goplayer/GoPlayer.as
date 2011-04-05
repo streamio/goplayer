@@ -6,7 +6,7 @@ package goplayer
   import flash.display.Sprite
   import flash.events.Event
 
-  public class GoPlayer extends Component implements ApplicationListener
+  public class GoPlayer extends Component implements IApplicationListener
   {
     private var application : Application
 

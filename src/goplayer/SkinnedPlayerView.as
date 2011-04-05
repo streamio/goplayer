@@ -7,7 +7,7 @@ package goplayer
   import flash.utils.getTimer
 
   public class SkinnedPlayerView extends Component
-    implements PlayerVideoUpdateListener, SkinBackend
+    implements IPlayerVideoUpdateListener, ISkinBackend
   {
     private const idleTime : Duration = Duration.seconds(2)
     private const userInteractionStopwatch : Stopwatch = new Stopwatch
@@ -15,7 +15,7 @@ package goplayer
 
     private var video : PlayerVideo
     private var player : Player
-    private var skin : Skin
+    private var skin : ISkin
     private var configuration : SkinnedPlayerViewConfiguration
 
     private var _mousePointerVisible : Boolean = true

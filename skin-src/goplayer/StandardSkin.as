@@ -24,7 +24,7 @@ package goplayer
       super.update()
 
       setPosition(largePlayButton, dimensions.center)
-      setDimensions(largePlayButton, dimensions.scaledBy(.35).innerSquare)
+      setDimensions(largePlayButton, dimensions.scaledBy(.4).innerSquare)
 
       setPosition(popupBackground, new Position(0, 0))
       setDimensions(popupBackground, dimensions)

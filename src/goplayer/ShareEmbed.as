@@ -4,10 +4,10 @@ package goplayer
   
   public class ShareEmbed
   {
-    private var movie : Movie
+    private var movie : IMovie
     private var dimensions : Dimensions
 
-    public function ShareEmbed(movie : Movie, dimensions : Dimensions)
+    public function ShareEmbed(movie : IMovie, dimensions : Dimensions)
     { this.movie = movie, this.dimensions = dimensions }
     
     public function openTwitter() : void
