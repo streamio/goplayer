@@ -4,6 +4,7 @@ package goplayer
   {
     public var skin : ISkin
     public var enableChrome : Boolean
+    public var enableLargePlayButton : Boolean
     public var enableTitle : Boolean
     public var enableShareButton : Boolean
     public var enableEmbedButton : Boolean

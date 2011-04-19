@@ -87,8 +87,8 @@ package goplayer
       bufferingIndicatorFader.targetAlpha = bufferingUnexpectedly && largePlayButton.alpha == 0 ? 1 : 0
     }
 
-    private function get showLargePlayButton() : Boolean
-    { return !running }
+    override protected function get showLargePlayButton() : Boolean
+    { return super.showLargePlayButton && !running }
 
     override protected function get showChrome() : Boolean
     { return super.showChrome || hoveringChrome }

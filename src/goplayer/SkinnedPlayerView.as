@@ -153,6 +153,9 @@ package goplayer
 
     // -----------------------------------------------------
 
+    public function get showLargePlayButton() : Boolean
+    { return configuration.enableLargePlayButton }
+
     public function get showTitle() : Boolean
     { return PluginAPI.showOnlyControlbar ? false : configuration.enableTitle }
 

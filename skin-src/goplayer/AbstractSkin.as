@@ -51,6 +51,9 @@ package goplayer
     protected function get showChrome() : Boolean
     { return backend.showChrome }
 
+    protected function get showLargePlayButton() : Boolean
+    { return backend.showLargePlayButton }
+
     protected function get showTitle() : Boolean
     { return backend.showTitle }
 

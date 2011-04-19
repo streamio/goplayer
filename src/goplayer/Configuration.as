@@ -13,6 +13,7 @@ package goplayer
     public var revision : String
 
     public var enableChrome : Boolean
+    public var enableLargePlayButton : Boolean
     public var enableTitle : Boolean
     public var enableShareButton : Boolean
     public var enableEmbedButton : Boolean

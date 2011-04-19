@@ -153,6 +153,7 @@ package goplayer
 
       result.skin = skinSWF.getSkin()
       result.enableChrome = configuration.enableChrome
+      result.enableLargePlayButton = configuration.enableLargePlayButton
       result.enableTitle = configuration.enableTitle
       result.enableShareButton = configuration.enableShareButton
       result.enableEmbedButton = configuration.enableEmbedButton

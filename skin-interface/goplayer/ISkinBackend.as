@@ -10,6 +10,7 @@ package goplayer
 
     function get showChrome() : Boolean
     function get showTitle() : Boolean
+    function get showLargePlayButton() : Boolean
     function get showShareButton() : Boolean
     function get showEmbedButton() : Boolean
     function get showPlayPauseButton() : Boolean
