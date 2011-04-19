@@ -33,7 +33,7 @@ package goplayer
       skin.backend = this
 
       addChild(video)
-	  addChild(plugin)
+      addChild(plugin)
       addChild(skin.frontend)
 
       video.addUpdateListener(this)
