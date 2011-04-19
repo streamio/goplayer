@@ -76,7 +76,7 @@ package goplayer
     // the big play button checks this var, and decides to show or hide
     // therefore we return true, to make it disappear
     public function get running() : Boolean
-    { return PluginAPI.showOnlyControlbar || started && !finished }
+    { return PluginAPI.showOnlyControlbar || (started && !finished) }
 
     public function get finished() : Boolean
     { return _finished }
