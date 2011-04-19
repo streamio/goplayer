@@ -211,7 +211,7 @@ package goplayer
     { return player.playing }
 
     public function get bufferingUnexpectedly() : Boolean
-    { return player.bufferingUnexpectedly }
+    { return player.initiatingStream || player.bufferingUnexpectedly }
 
     public function get volume() : Number
     { return player.volume }

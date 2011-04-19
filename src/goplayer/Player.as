@@ -17,6 +17,7 @@ package goplayer
     private var sharedVolumeVariable : SharedVariable
     private var shareEmbed : ShareEmbed
 
+    private var _initiatingStream : Boolean = false
     private var _started : Boolean = false
     private var _finished : Boolean = false
     private var triedStandardRTMP : Boolean = false
@@ -73,6 +74,9 @@ package goplayer
     public function get started() : Boolean
     { return _started }
 
+    public function get initiatingStream() : Boolean
+    { return _initiatingStream }
+
     // the big play button checks this var, and decides to show or hide
     // therefore we return true, to make it disappear
     public function get running() : Boolean
@@ -92,6 +96,7 @@ package goplayer
     public function start() : void
     {
       _started = true
+      _initiatingStream = true
 
       if (enableRTMP && movie.rtmpURL != null)
         connectUsingRTMP()
@@ -220,6 +225,7 @@ package goplayer
     public function handleStreamingStarted() : void
     {
       useStartBuffer()
+      _initiatingStream = false
       _buffering = true
       _finished = false
     }
