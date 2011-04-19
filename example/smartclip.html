@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Streamio GoPlayer Demo with Smartclip integration</title>
+    <meta charset="utf-8">
+    <link href="goplayer-demo.css" rel="stylesheet">
+    <script src="swfobject.js"></script>
+    <script src="goplayer-demo.js"></script>
+    <script>
+      swfobject.addDomLoadEvent(function () {
+        var params = { allowfullscreen: true }
+		
+        var flashvars = {
+          "autoplay":"false",
+          "src": "streamio:video:4d2345221ee3ba35020001d1",
+          "external-logging-function": "goplayer_demo_log",
+          "skin": "goplayer-skin.swf",
+          "plugin": '{"src": "goplayer-plugin-uif.swf","preroll":"http://cdn1.eyewonder.com/200125/754851/1149206/1149206_tag.xml?ewbust=[timestamp]","midroll":"http://cdn1.eyewonder.com/200125/754851/1149206/1149206_tag.xml?ewbust=[timestamp]","postroll":"http://cdn1.eyewonder.com/200125/754851/1149206/1149206_tag.xml?ewbust=[timestamp]","overlay":"http://cdn.eyewonder.com/100125/758003/1312753/1312753_tag.xml?ewbust=[timestamp]"}'
+        }
+		
+        goplayer_demo_parse_query_string(location.search, flashvars)
+
+        swfobject.embedSWF("goplayer.swf", "player", 800, 450, "9.0.0", null, flashvars, params)
+      })
+    </script>
+  </head>
+  <body>
+    <div id="player-container">
+    <div id="player"></div>
+    </div>
+    <div id="log-container">
+    <ul id="log"></ul>
+    </div>
+  </body>
+</html>

@@ -1,5 +1,6 @@
 package goplayer
 {
+  import flash.display.MovieClip;
   import flash.display.Sprite
   import flash.display.DisplayObject
   import flash.events.Event
@@ -8,6 +9,8 @@ package goplayer
   {
     private var _implicitDimensions : Dimensions = null
     private var _explicitDimensions : Dimensions = null
+
+    private var _pluginLayer : MovieClip = new MovieClip
 
     public function Component()
     { addEventListener(Event.ADDED_TO_STAGE, handleAddedToStage) }
@@ -18,8 +21,7 @@ package goplayer
     protected function initialize() : void
     {}
 
-    override public function addChildAt
-      (child : DisplayObject, index : int) : DisplayObject
+    override public function addChildAt(child : DisplayObject, index : int) : DisplayObject
     {
       const result : DisplayObject = super.addChildAt(child, index)
 
@@ -30,6 +32,9 @@ package goplayer
 
     override public function addChild(child : DisplayObject) : DisplayObject
     { return addChildAt(child, numChildren) }
+
+    public function get plugin() : MovieClip
+    { return _pluginLayer }
 
     public function set position(value : Position) : void
     { setPosition(this, value) }

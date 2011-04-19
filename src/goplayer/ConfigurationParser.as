@@ -1,5 +1,8 @@
 package goplayer
 {
+  import com.adobe.serialization.json.JSONDecoder;
+  import com.adobe.serialization.json.JSONParseError;
+
   public class ConfigurationParser
   {
     public static const DEFAULT_SKIN_URL : String = "goplayer-skin.swf"
@@ -28,15 +31,16 @@ package goplayer
          "skinshowfullscreenbutton",
 
          "streamioapi",
-         "streamiotracker"]
+         "streamiotracker",
+
+         "plugin"]
 
     private const result : Configuration = new Configuration
 
     private var parameters : Object
     private var originalParameterNames : Object
 
-    public function ConfigurationParser
-      (parameters : Object, originalParameterNames : Object)
+    public function ConfigurationParser(parameters : Object, originalParameterNames : Object)
     {
       this.parameters = parameters
       this.originalParameterNames = originalParameterNames
@@ -77,6 +81,11 @@ package goplayer
         ("streamioapi", DEFAULT_STREAMIO_API_URL)
       result.trackerID = getString
         ("streamiotracker", DEFAULT_STREAMIO_TRACKER_ID)
+
+      result.pluginConfig = getObject("plugin", { } )
+
+      if (result.pluginConfig.src)
+        result.pluginURL = result.pluginConfig.src
     }
 
     private function getStreamioVideoID() : String
@@ -145,6 +154,26 @@ package goplayer
         return $getBoolean(name, parameters[name], fallback)
       else
         return fallback
+    }
+
+    private function getObject(name : String, fallback : Object) : Object
+    {
+      var output:Object = fallback
+
+      if (name in parameters)
+      {
+        var jsonDecoder:JSONDecoder
+
+        try
+          { jsonDecoder = new JSONDecoder(parameters[name], false) }
+        catch (error : JSONParseError)
+          { reportInvalidParameter(name, parameters[name], ["valid JSON"]) }
+
+        if(jsonDecoder)
+          output = jsonDecoder.getValue()
+      }
+
+      return output
     }
 
     private function $getBoolean

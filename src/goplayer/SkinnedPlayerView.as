@@ -7,7 +7,7 @@ package goplayer
   import flash.utils.getTimer
 
   public class SkinnedPlayerView extends Component
-    implements IPlayerVideoUpdateListener, ISkinBackend
+  implements IPlayerVideoUpdateListener, ISkinBackend
   {
     private const idleTime : Duration = Duration.seconds(2)
     private const userInteractionStopwatch : Stopwatch = new Stopwatch
@@ -33,6 +33,7 @@ package goplayer
       skin.backend = this
 
       addChild(video)
+	  addChild(plugin)
       addChild(skin.frontend)
 
       video.addUpdateListener(this)
@@ -81,7 +82,12 @@ package goplayer
     }
 
     public function get showMousePointer() : Boolean
-    { return !player.playing || !userIdle }
+    {
+      if (PluginAPI.hideUIElements)
+        return true
+      else
+        return !player.playing || !userIdle
+    }
 
     public function get showChrome() : Boolean
     { return enableChrome && !userIdle }
@@ -90,7 +96,7 @@ package goplayer
     { return configuration.enableChrome }
 
     private function get userIdle() : Boolean
-    { return !userInteractionStopwatch.within(idleTime) }
+    { return PluginAPI.hideUIElements || !userInteractionStopwatch.within(idleTime) }
 
     // -----------------------------------------------------
 
@@ -148,7 +154,7 @@ package goplayer
     // -----------------------------------------------------
 
     public function get showTitle() : Boolean
-    { return configuration.enableTitle }
+    { return PluginAPI.showOnlyControlbar ? false : configuration.enableTitle }
 
     public function get showShareButton() : Boolean
     { return configuration.enableShareButton }

@@ -80,7 +80,10 @@ package goplayer
     { relayout() }
 
     private function handleFullScreenEvent(event : FullScreenEvent) : void
-    { relayout() }
+    {
+      PluginAPI.dimensions = dimensions
+      relayout()
+    }
 
     override public function update() : void
     {

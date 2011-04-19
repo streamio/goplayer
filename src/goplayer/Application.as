@@ -3,7 +3,7 @@ package goplayer
   import flash.ui.Keyboard
 
   public class Application extends Component
-    implements ISkinSWFLoaderListener, IMovieHandler, IPlayerListener
+  implements ISkinSWFLoaderListener, IPluginSWFLoaderListener, IMovieHandler, IPlayerListener
   {
     private const background : Background = new Background(0x000000, 1)
     private const contentLayer : Component = new Component
@@ -14,6 +14,7 @@ package goplayer
     private var api : StreamioAPI
 
     private var skinSWF : ISkinSWF = null
+    private var pluginSWF : IPluginSWF = null
     private var movie : IMovie = null
     private var player : Player = null
     private var view : Component = null
@@ -48,6 +49,9 @@ package goplayer
     {
       onkeydown(stage, handleKeyDown)
 
+      if (configuration.pluginURL)
+        loadPlugin()
+
       if (configuration.skinURL)
         loadSkin()
       else
@@ -69,12 +73,34 @@ package goplayer
       api.fetchMovie(configuration.movieID, this)
     }
 
+    private function loadPlugin() : void
+    { new PluginSWFLoader(configuration.pluginURL, this).execute() }
+
+    public function handlePluginSWFLoaded(swf : IPluginSWF) : void
+    {
+    	PluginAPI.config = configuration.pluginConfig
+    	PluginAPI.mouseEventListener = stage
+    	pluginSWF = swf
+    	initPlugin()
+    }
+
+    private function initPlugin() : void
+    {
+    	if(pluginSWF)
+    	{
+    		PluginAPI.plugin = pluginSWF.getPlugin()
+    		PluginAPI.plugin.init()
+    	}
+    }
+
     public function handleMovie(movie : IMovie) : void
     {
       this.movie = movie
 
       logMovieInformation()
       createPlayer()
+
+      PluginAPI.dimensions = dimensions
 
       if (configuration.enableAutoplay)
         player.start()
@@ -105,8 +131,7 @@ package goplayer
         player.destroy()
 
       const kit : PlayerKit = new PlayerKit
-        (movie, configuration.bitratePolicy,
-         configuration.enableRTMP, api, dimensions)
+        (movie, configuration.bitratePolicy, configuration.enableRTMP, api, dimensions)
 
       player = kit.player
       player.listener = this
@@ -115,6 +140,9 @@ package goplayer
         view = new SkinnedPlayerView(kit.video, player, viewConfiguration)
       else
         view = new SimplePlayerView(kit.video, player)
+
+      if (pluginSWF)
+        view.plugin.addChild(PluginAPI.plugin.getDisplay())
 
       contentLayer.addChild(view)
     }

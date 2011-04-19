@@ -44,6 +44,8 @@ package goplayer
        sharedVolumeVariable : SharedVariable,
        shareEmbed : ShareEmbed)
     {
+      PluginAPI.player = this;
+
       this.connection = connection
       _movie = movie
       this.bitratePolicy = bitratePolicy
@@ -71,8 +73,10 @@ package goplayer
     public function get started() : Boolean
     { return _started }
 
+    // the big play button checks this var, and decides to show or hide
+    // therefore we return true, to make it disappear
     public function get running() : Boolean
-    { return started && !finished }
+    { return PluginAPI.showOnlyControlbar || started && !finished }
 
     public function get finished() : Boolean
     { return _finished }
@@ -172,6 +176,14 @@ package goplayer
       stream.listener = this
       stream.volume = volume
 
+      if (PluginAPI.lockDown)
+        PluginAPI.onBeforeContent()
+      else
+        proceedStartPlaying()
+    }
+
+    public function proceedStartPlaying():void
+    {
       useStartBuffer()
 
       if (usingRTMP)
@@ -196,7 +208,7 @@ package goplayer
     }
 
     // -----------------------------------------------------
-    
+
     public function handleNetStreamMetadata(data : Object) : void
     {
       metadata = data
@@ -277,7 +289,16 @@ package goplayer
 
     private function handleFinishedPlaying() : void
     {
+      if(PluginAPI.plugin)
+        PluginAPI.afterContent()
+      else
+        proceedHandleFinishedPlaying()
+    }
+
+    public function proceedHandleFinishedPlaying() : void
+    {
       debug("Finished playing.")
+
       _finished = true
 
       if (_listener != null)
@@ -301,6 +322,8 @@ package goplayer
 
     public function handleCurrentTimeChanged() : void
     {
+      PluginAPI.videoUpdate = {'currentTime': currentTime.seconds, 'duration': duration.seconds};
+
       if (_listener != null)
         _listener.handleCurrentTimeChanged()
     }
@@ -312,14 +335,34 @@ package goplayer
 
     public function set paused(value : Boolean) : void
     {
-      if (stream != null && _paused != value)
-        _paused = value, stream.paused = value
+      if (PluginAPI.lockDown)
+      {
+        if (paused)
+          PluginAPI.pluginPause()
+        else
+          PluginAPI.pluginPlay()
+      }
+      else
+      {
+        if (stream != null && _paused != value)
+          _paused = value, stream.paused = value
+      }
     }
 
     public function togglePaused() : void
     {
-      if (stream != null)
-        paused = !paused
+      if (PluginAPI.lockDown)
+      {
+        if(paused)
+          PluginAPI.pluginPause()
+        else
+          PluginAPI.pluginPlay()
+      }
+      else
+      {
+        if (stream != null)
+          paused = !paused
+      }
     }
 
     // -----------------------------------------------------
@@ -345,7 +388,9 @@ package goplayer
 
     public function set currentTime(value : Duration) : void
     {
-      if (stream != null)
+      if (PluginAPI.lockDown)
+        PluginAPI.onSeek()
+      else if (stream != null)
         $currentTime = value
     }
 
@@ -364,6 +409,14 @@ package goplayer
     { currentTime = currentTime.plus(delta) }
 
     public function rewind() : void
+    {
+      if (PluginAPI.lockDown)
+        PluginAPI.onBeforeRewind()
+      else
+        proceedRewind()
+    }
+
+    public function proceedRewind() : void
     { currentTime = Duration.ZERO }
 
     public function get playing() : Boolean
@@ -383,6 +436,8 @@ package goplayer
 
       if (stream)
         stream.volume = volume
+
+      PluginAPI.volume = volume
     }
 
     public function changeVolumeBy(delta : Number) : void
