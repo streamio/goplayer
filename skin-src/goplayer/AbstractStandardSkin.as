@@ -27,10 +27,8 @@ package goplayer
       super.initialize()
 
       chromeFader = new Fader(chrome, Duration.seconds(.3))
-      largePlayButtonFader = new Fader
-        (largePlayButton, Duration.seconds(1))
-      bufferingIndicatorFader = new Fader
-        (bufferingIndicator, Duration.seconds(.3))
+      largePlayButtonFader = new Fader(largePlayButton, Duration.seconds(1))
+      bufferingIndicatorFader = new Fader(bufferingIndicator, Duration.seconds(.3))
 
       seekBarTooltip.visible = false
       seekBar.mouseChildren = false
@@ -70,12 +68,10 @@ package goplayer
 
       volumeSliderThumb.y = volumeSliderThumbY
       volumeSliderFill.height = volumeSliderFillMaxHeight * volume
-      volumeSliderFill.y = volumeSliderFillMinY
-        + volumeSliderFillMaxHeight * (1 - volume)
+      volumeSliderFill.y = volumeSliderFillMinY + volumeSliderFillMaxHeight * (1 - volume)
 
       leftTimeField.text = elapsedTimeText
-      rightTimeField.text = showRemainingTime
-        ? remainingTimeText : totalTimeText
+      rightTimeField.text = showRemainingTime ? remainingTimeText : totalTimeText
 
       seekBarBackground.width = seekBarWidth
       seekBarGroove.width = seekBarWidth
