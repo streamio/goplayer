@@ -10,6 +10,7 @@ package goplayer
     public var enableAutoplay : Boolean
     public var enableLooping : Boolean
     public var externalLoggingFunctionName : String
+    public var revision : String
 
     public var enableChrome : Boolean
     public var enableTitle : Boolean

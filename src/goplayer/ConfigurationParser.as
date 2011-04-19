@@ -18,6 +18,7 @@ package goplayer
          "autoplay",
          "loop",
          "externalloggingfunction",
+         "revision",
 
          "skinshowchrome",
          "skinshowtitle",
@@ -48,7 +49,8 @@ package goplayer
 
     public function execute() : void
     {
-      result.skinURL = getString("skin", DEFAULT_SKIN_URL)
+      result.revision = getString("revision", "")
+      result.skinURL = getString("skin", DEFAULT_SKIN_URL) + (result.revision.length > 0 ? "?" + result.revision : "")
       result.movieID = getStreamioVideoID()
       result.bitratePolicy = getBitratePolicy("bitrate", BitratePolicy.BEST)
       result.enableRTMP = getBoolean("enablertmp", true)
