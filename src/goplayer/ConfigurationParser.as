@@ -6,8 +6,7 @@ package goplayer
   public class ConfigurationParser
   {
     public static const DEFAULT_SKIN_URL : String = "goplayer-skin.swf"
-    public static const DEFAULT_STREAMIO_API_URL : String
-      = "http://streamio.com/api"
+    public static const DEFAULT_STREAMIO_API_URL : String = "http://streamio.com/api"
     public static const DEFAULT_STREAMIO_TRACKER_ID : String = "global"
 
     public static const VALID_PARAMETERS : Array
@@ -58,31 +57,19 @@ package goplayer
       result.enableLooping = getBoolean("loop", false)
       result.externalLoggingFunctionName = getString("externalloggingfunction", "")
 
-      result.enableChrome
-        = getBoolean("skinshowchrome", true)
-      result.enableTitle
-        = getBoolean("skinshowtitle", true)
-      result.enableShareButton
-        = getBoolean("skinshowsharebutton", false)
-      result.enableEmbedButton
-        = getBoolean("skinshowembedbutton", false)
-      result.enablePlayPauseButton
-        = getBoolean("skinshowplaypausebutton", true)
-      result.enableElapsedTime
-        = getBoolean("skinshowelapsedtime", true)
-      result.enableSeekBar
-        = getBoolean("skinshowseekbar", true)
-      result.enableTotalTime
-        = getBoolean("skinshowtotaltime", true)
-      result.enableVolumeControl
-        = getBoolean("skinshowvolumecontrol", true)
-      result.enableFullscreenButton
-        = getBoolean("skinshowfullscreenbutton", true)
+      result.enableChrome = getBoolean("skinshowchrome", true)
+      result.enableTitle = getBoolean("skinshowtitle", true)
+      result.enableShareButton = getBoolean("skinshowsharebutton", false)
+      result.enableEmbedButton = getBoolean("skinshowembedbutton", false)
+      result.enablePlayPauseButton = getBoolean("skinshowplaypausebutton", true)
+      result.enableElapsedTime = getBoolean("skinshowelapsedtime", true)
+      result.enableSeekBar = getBoolean("skinshowseekbar", true)
+      result.enableTotalTime = getBoolean("skinshowtotaltime", true)
+      result.enableVolumeControl = getBoolean("skinshowvolumecontrol", true)
+      result.enableFullscreenButton = getBoolean("skinshowfullscreenbutton", true)
 
-      result.apiURL = getString
-        ("streamioapi", DEFAULT_STREAMIO_API_URL)
-      result.trackerID = getString
-        ("streamiotracker", DEFAULT_STREAMIO_TRACKER_ID)
+      result.apiURL = getString("streamioapi", DEFAULT_STREAMIO_API_URL)
+      result.trackerID = getString("streamiotracker", DEFAULT_STREAMIO_TRACKER_ID)
 
       result.pluginConfig = getObject("plugin", { } )
 
