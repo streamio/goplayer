@@ -163,8 +163,7 @@ package goplayer
     private function get bandwidthDeterminationNeeded() : Boolean
     { return bitratePolicy == BitratePolicy.BEST }
 
-    public function handleBandwidthDetermined
-      (bandwidth : Bitrate, latency : Duration) : void
+    public function handleBandwidthDetermined(bandwidth : Bitrate, latency : Duration) : void
     {
       measuredBandwidth = bandwidth
       measuredLatency = latency
@@ -362,12 +361,19 @@ package goplayer
         if(paused)
           PluginAPI.pluginPause()
         else
-          PluginAPI.pluginPlay()
+        {
+          if (stream)
+            PluginAPI.pluginPlay()
+          else
+            start()
+        }
       }
       else
       {
-        if (stream != null)
+        if (stream)
           paused = !paused
+        else
+          start()
       }
     }
 
