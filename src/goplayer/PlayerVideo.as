@@ -22,8 +22,7 @@ package goplayer
     private var player : Player
     private var video : Video
 
-    public function PlayerVideo
-      (player : Player, video : Video)
+    public function PlayerVideo(player : Player, video : Video)
     {
       this.player = player
       this.video = video
@@ -43,24 +42,28 @@ package goplayer
       timer.start()
 
       addEventListener(Event.ADDED_TO_STAGE, handleAddedToStage)
+      addEventListener(MouseEvent.CLICK, handleClick)
       addEventListener(MouseEvent.DOUBLE_CLICK, handleDoubleClick)
     }
 
-    public function addUpdateListener
-      (value : IPlayerVideoUpdateListener) : void
+    public function addUpdateListener(value : IPlayerVideoUpdateListener) : void
     { listeners.push(value) }
 
     private function handleAddedToStage(event : Event) : void
     {
-      stage.addEventListener
-        (FullScreenEvent.FULL_SCREEN, handleFullScreenEvent)
+      stage.addEventListener(FullScreenEvent.FULL_SCREEN, handleFullScreenEvent)
     }
+
+    private function handleClick(event : MouseEvent) : void
+    { player.togglePaused() }
 
     private function handleDoubleClick(event : MouseEvent) : void
     { toggleFullscreen() }
 
     public function toggleFullscreen() : void
     {
+      player.togglePaused() // Reverse the effect of the first click
+      
       if (fullscreenEnabled)
         disableFullscreen()
       else
