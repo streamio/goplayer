@@ -84,7 +84,9 @@ package goplayer
       largePlayButtonFader.targetAlpha = showLargePlayButton ? 1 : 0
       largePlayButton.mouseEnabled = showLargePlayButton
 
-      bufferingIndicatorFader.targetAlpha = bufferingUnexpectedly && largePlayButton.alpha == 0 ? 1 : 0
+      bufferingIndicatorFader.targetAlpha = bufferingUnexpectedly &&
+                                            largePlayButton.alpha == 0 &&
+                                            !PluginAPI.lockDown ? 1 : 0
     }
 
     override protected function get showLargePlayButton() : Boolean
