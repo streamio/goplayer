@@ -58,12 +58,13 @@ package goplayer
     { player.togglePaused() }
 
     private function handleDoubleClick(event : MouseEvent) : void
-    { toggleFullscreen() }
+    {
+      player.togglePaused() // Reverse the effect of the first click
+      toggleFullscreen()
+    }
 
     public function toggleFullscreen() : void
     {
-      player.togglePaused() // Reverse the effect of the first click
-      
       if (fullscreenEnabled)
         disableFullscreen()
       else
