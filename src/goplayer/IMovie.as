@@ -2,6 +2,8 @@ package goplayer
 {
   public interface IMovie
   {
+    function get attributes() : Object // Should be a pure AS object that can be serialized through ExternalInterface
+
     function get id() : String
     function get title() : String
     function get duration() : Duration
