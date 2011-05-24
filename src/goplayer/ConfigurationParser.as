@@ -49,14 +49,14 @@ package goplayer
 
     public function execute() : void
     {
-      result.revision = getString("revision", "")
+      result.revision = getString("revision")
       result.skinURL = getString("skin", DEFAULT_SKIN_URL) + (result.revision.length > 0 ? "?" + result.revision : "")
       result.movieID = getStreamioVideoID()
       result.bitratePolicy = getBitratePolicy("bitrate", BitratePolicy.BEST)
       result.enableRTMP = getBoolean("enablertmp", true)
       result.enableAutoplay = getBoolean("autoplay", false)
       result.enableLooping = getBoolean("loop", false)
-      result.externalLoggingFunctionName = getString("externalloggingfunction", "")
+      result.externalLoggingFunctionName = getString("externalloggingfunction")
 
       result.enableChrome = getBoolean("skinshowchrome", true)
       result.enableLargePlayButton = getBoolean("skinshowlargeplaybutton", true)
@@ -135,7 +135,7 @@ package goplayer
 
     // -----------------------------------------------------
 
-    private function getString(name : String, fallback : String) : String
+    private function getString(name : String, fallback : String = "") : String
     { return name in parameters ? parameters[name] : fallback }
 
     private function getBoolean
