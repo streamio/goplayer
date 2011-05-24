@@ -8,18 +8,20 @@
     <script src="goplayer-demo.js"></script>
     <script>
       swfobject.addDomLoadEvent(function () {
+        var buster = new Date().valueOf() // Used to disable browser caching
+
         var params = { allowfullscreen: true }
         var flashvars = {
-          src: "streamio:video:4d2345221ee3ba35020001d1",
+          src: "streamio:video:4d52c7e6e426007ba5000015",
+          skin: "goplayer-brilique-skin.swf",
+          "skin:show-large-play-button": true,
           "external-logging-function": "goplayer_demo_log",
-          "skin": "goplayer-black-skin.swf"
+          revision: buster
         }
 
         goplayer_demo_parse_query_string(location.search, flashvars)
 
-        swfobject.embedSWF
-          ("goplayer.swf", "player", 800, 450,
-           "9.0.0", null, flashvars, params)
+        swfobject.embedSWF("goplayer.swf?"+buster, "player", 800, 450, "9.0.0", null, flashvars, params)
       })
     </script>
   </head>
