@@ -8,19 +8,20 @@
     <script src="goplayer-demo.js"></script>
     <script>
       swfobject.addDomLoadEvent(function () {
+        var buster = new Date().valueOf() // Used to disable browser caching
+
         var params = { allowfullscreen: true }
-		
         var flashvars = {
-          "autoplay":"false",
-          "src": "streamio:video:4d2345221ee3ba35020001d1",
+          src: "streamio:video:4d2345221ee3ba35020001d1",
+          skin: "goplayer-black-skin.swf",
           "external-logging-function": "goplayer_demo_log",
-          "skin": "goplayer-skin.swf",
-          "plugin": '{"src": "goplayer-plugin-uif.swf","preroll":"http://cdn1.eyewonder.com/200125/754851/1149206/1149206_tag.xml?ewbust=[timestamp]","midroll":"http://cdn1.eyewonder.com/200125/754851/1149206/1149206_tag.xml?ewbust=[timestamp]","postroll":"http://cdn1.eyewonder.com/200125/754851/1149206/1149206_tag.xml?ewbust=[timestamp]","overlay":"http://cdn.eyewonder.com/100125/758003/1312753/1312753_tag.xml?ewbust=[timestamp]"}'
+          revision: buster,
+          "plugin": '{"src": "goplayer-plugin-uif-fixed.swf?'+buster+'","preroll":"http://cdn1.eyewonder.com/200125/754851/1149206/1149206_tag.xml?ewbust=[timestamp]"}'
         }
 		
         goplayer_demo_parse_query_string(location.search, flashvars)
 
-        swfobject.embedSWF("goplayer.swf", "player", 800, 450, "9.0.0", null, flashvars, params)
+        swfobject.embedSWF("goplayer.swf?"+buster, "player", 800, 450, "9.0.0", null, flashvars, params)
       })
     </script>
   </head>
