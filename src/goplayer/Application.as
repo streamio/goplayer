@@ -29,6 +29,8 @@ package goplayer
         // Parse the parameters again for logging purposes.
         installLogger(), ConfigurationParser.parse(parameters)
 
+      JavaScriptAPI.initialize()
+
       api = new StreamioAPI(configuration.apiURL, new StandardHTTP, configuration.trackerID)
 
       addChild(background)
