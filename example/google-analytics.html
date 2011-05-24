@@ -1,0 +1,75 @@
+<!-- Please note that this example will not send any data to google analytics if you're visiting the page via localhost -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Streamio GoPlayer Demo with Google Analytics integration</title>
+    <meta charset="utf-8">
+    <link href="goplayer-demo.css" rel="stylesheet">
+    <script src="swfobject.js"></script>
+    <script src="goplayer-demo.js"></script>
+    <script>
+      var googleAnalyticsWebPropertyID = "UA-1493640-1" // Replace with your own Web Property ID!
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', googleAnalyticsWebPropertyID]);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+      swfobject.addDomLoadEvent(function () {
+	      var buster = new Date().valueOf() // Used to disable browser caching
+	    
+        var params = { allowfullscreen: true }
+        var flashvars = {
+          src: "streamio:video:4d52bd34e42600600100008e",
+          skin: "goplayer-black-skin.swf",
+          "external-logging-function": "goplayer_demo_log",
+          revision: buster,
+        }
+        var attributes = { id: "streamio-player" }
+		
+        goplayer_demo_parse_query_string(location.search, flashvars)
+
+        swfobject.embedSWF("goplayer.swf?"+buster, "player", 800, 450, "9.0.0", null, flashvars, params, attributes)
+      })
+      
+      // The onPlayerReady is run by GoPlayer when its event handler has been initialized
+      function onPlayerReady() {
+        player = document.getElementById("streamio-player")
+        player.addEventListener("onVideoLoaded")
+        player.addEventListener("onStart")
+        player.addEventListener("onComplete")
+      }
+      
+      function onVideoLoaded(e) {
+        window.video = e.video
+        trackGoogleAnalyticEvent("load")
+      }
+      
+      function onStart(e) {
+        trackGoogleAnalyticEvent("play")
+      }
+      
+      function onComplete(e) {
+        trackGoogleAnalyticEvent("complete")
+        player.removeEventListener("onComplete")
+      }
+      
+      function trackGoogleAnalyticEvent(event, label, value) {
+        _gaq.push(['_trackEvent', "Streamio", event, video.id+": "+video.title, value]);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="player-container">
+    <div id="player"></div>
+    </div>
+    <div id="log-container">
+    <ul id="log"></ul>
+    </div>
+  </body>
+</html>
