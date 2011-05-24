@@ -104,6 +104,8 @@ package goplayer
 
       PluginAPI.dimensions = dimensions
 
+      JavaScriptAPI.dispatchEvent("onVideoLoaded", {video: movie.attributes})
+
       if (configuration.enableAutoplay)
         player.start()
     }

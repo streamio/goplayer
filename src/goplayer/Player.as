@@ -104,6 +104,7 @@ package goplayer
         connectUsingHTTP()
         
       reporter.reportMoviePlayed(movie.id)
+      JavaScriptAPI.dispatchEvent("onStart", {video: movie.attributes})
     }
 
     public function handleConnectionFailed() : void
@@ -303,6 +304,8 @@ package goplayer
     public function proceedHandleFinishedPlaying() : void
     {
       debug("Finished playing.")
+
+      JavaScriptAPI.dispatchEvent("onComplete", {video: movie.attributes})
 
       _finished = true
 
