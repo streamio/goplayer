@@ -170,6 +170,9 @@ package goplayer
         : Duration.seconds(stream.bufferTime)
     }
 
+    public function get bytesLoaded() : uint { return stream.bytesLoaded }
+    public function get bytesTotal() : uint { return stream.bytesTotal }
+
     public function set bufferTime(value : Duration) : void
     {
       if (!Duration.equals(value, bufferTime))

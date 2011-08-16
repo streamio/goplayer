@@ -24,6 +24,9 @@ package goplayer
     function get bufferTime() : Duration
     function set bufferTime(value : Duration) : void
 
+    function get bytesLoaded() : uint
+    function get bytesTotal() : uint
+
     function get volume() : Number
     function set volume(value : Number) : void
 
