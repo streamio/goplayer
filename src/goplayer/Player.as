@@ -392,7 +392,7 @@ package goplayer
     { return getRatio(currentTime.seconds, duration.seconds) }
 
     public function get bufferRatio() : Number
-    { return getRatio(bufferPosition.seconds, duration.seconds) }
+    { return stream ? getRatio(stream.bytesLoaded, stream.bytesTotal) : 0 }
 
     private function getRatio
       (numerator : Number, denominator : Number) : Number
