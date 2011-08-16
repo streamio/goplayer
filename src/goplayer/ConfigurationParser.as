@@ -60,7 +60,7 @@ package goplayer
 
       result.enableChrome = getBoolean("skinshowchrome", true)
       result.enableLargePlayButton = getBoolean("skinshowlargeplaybutton", true)
-      result.enableTitle = getBoolean("skinshowtitle", true)
+      result.enableTitle = getBoolean("skinshowtitle", false)
       result.enableShareButton = getBoolean("skinshowsharebutton", false)
       result.enableEmbedButton = getBoolean("skinshowembedbutton", false)
       result.enablePlayPauseButton = getBoolean("skinshowplaypausebutton", true)
