@@ -394,8 +394,7 @@ package goplayer
     public function get bufferRatio() : Number
     { return stream ? getRatio(stream.bytesLoaded, stream.bytesTotal) : 0 }
 
-    private function getRatio
-      (numerator : Number, denominator : Number) : Number
+    private function getRatio(numerator : Number, denominator : Number) : Number
     { return Math.min(1, numerator / denominator) }
 
     private function get bufferPosition() : Duration

@@ -194,8 +194,7 @@ package goplayer
 
     // -----------------------------------------------------
 
-    private function getBitratePolicy
-      (name : String, fallback : BitratePolicy) : BitratePolicy
+    private function getBitratePolicy(name : String, fallback : BitratePolicy) : BitratePolicy
     {
       if (name in parameters)
         return $getBitratePolicy(name, parameters[name], fallback)
@@ -203,9 +202,7 @@ package goplayer
         return fallback
     }
 
-    private function $getBitratePolicy
-      (name : String, value : String,
-       fallback : BitratePolicy) : BitratePolicy
+    private function $getBitratePolicy(name : String, value : String, fallback : BitratePolicy) : BitratePolicy
     {
       try
         { return $$getBitratePolicy(value) }

@@ -18,18 +18,15 @@ package goplayer
     private var _listener : IFlashNetStreamListener
     private var lastCurrentTime : Duration = null
 
-    public function StandardFlashNetStream
-      (connection : NetConnection, video : Video)
+    public function StandardFlashNetStream(connection : NetConnection, video : Video)
     {
       stream = new DynamicStream(connection)
       this.video = video
 
       video.attachNetStream(stream)
 
-      stream.addEventListener
-        (NetStatusEvent.NET_STATUS, handleNetStreamStatus)
-      stream.addEventListener
-        (AsyncErrorEvent.ASYNC_ERROR, handleAsyncError)
+      stream.addEventListener(NetStatusEvent.NET_STATUS, handleNetStreamStatus)
+      stream.addEventListener(AsyncErrorEvent.ASYNC_ERROR, handleAsyncError)
       stream.client = { onMetaData: handleNetStreamMetadata }
 
       addEventListeners()
@@ -49,8 +46,7 @@ package goplayer
         _listener.handleCurrentTimeChanged(), lastCurrentTime = value
     }
 
-    private function handleNetStreamStatus
-      (event : NetStatusEvent) : void
+    private function handleNetStreamStatus(event : NetStatusEvent) : void
     {
       const code : String = event.info.code
 
@@ -113,8 +109,7 @@ package goplayer
       this.stream.play(url.toString())
     }
 
-    private function getDynamicStreamItem
-      (stream : IRTMPStream, streams : Array) : DynamicStreamItem
+    private function getDynamicStreamItem(stream : IRTMPStream, streams : Array) : DynamicStreamItem
     {
       const result : DynamicStreamItem = new DynamicStreamItem
 
@@ -139,8 +134,7 @@ package goplayer
 
     public function get currentTime() : Duration
     {
-      return isNaN(stream.time) ? null
-        : Duration.seconds(stream.time)
+      return isNaN(stream.time) ? null : Duration.seconds(stream.time)
     }
 
     public function set currentTime(position : Duration) : void
@@ -148,26 +142,22 @@ package goplayer
 
     public function get bandwidth() : Bitrate
     {
-      return isNaN(stream.maxBandwidth) ? null
-        : Bitrate.kbps(stream.maxBandwidth)
+      return isNaN(stream.maxBandwidth) ? null : Bitrate.kbps(stream.maxBandwidth)
     }
 
     public function get bitrate() : Bitrate
     {
-      return isNaN(stream.currentStreamBitRate) ? null
-        : Bitrate.kbps(stream.currentStreamBitRate)
+      return isNaN(stream.currentStreamBitRate) ? null : Bitrate.kbps(stream.currentStreamBitRate)
     }
 
     public function get bufferLength() : Duration
     {
-      return isNaN(stream.bufferLength) ? null
-        : Duration.seconds(stream.bufferLength)
+      return isNaN(stream.bufferLength) ? null : Duration.seconds(stream.bufferLength)
     }
 
     public function get bufferTime() : Duration
     {
-      return isNaN(stream.bufferTime) ? null
-        : Duration.seconds(stream.bufferTime)
+      return isNaN(stream.bufferTime) ? null : Duration.seconds(stream.bufferTime)
     }
 
     public function get bytesLoaded() : uint { return stream.bytesLoaded }
@@ -176,19 +166,16 @@ package goplayer
     public function set bufferTime(value : Duration) : void
     {
       if (!Duration.equals(value, bufferTime))
-        $bufferTime = value
+      {
+        debug("Setting buffer size to " + value + ".")
+
+        stream.bufferTime = value.seconds
+
+        confirmBufferSizeChanged(value)
+      }
     }
 
     private var setBufferTimeToken : Object = null
-
-    private function set $bufferTime(value : Duration) : void
-    {
-      debug("Setting buffer size to " + value + ".")
-
-      stream.bufferTime = value.seconds
-
-      confirmBufferSizeChanged(value)
-    }
 
     private function confirmBufferSizeChanged(value : Duration) : void
     {
