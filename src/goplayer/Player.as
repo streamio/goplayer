@@ -102,7 +102,7 @@ package goplayer
         connectUsingRTMP()
       else
         connectUsingHTTP()
-        
+
       reporter.reportMoviePlayed(movie.id)
       JavaScriptAPI.dispatchEvent("onStart", {video: movie.attributes})
     }
@@ -152,8 +152,6 @@ package goplayer
 
     public function handleConnectionClosed() : void
     {}
-
-    // -----------------------------------------------------
 
     public function handleConnectionEstablished() : void
     {

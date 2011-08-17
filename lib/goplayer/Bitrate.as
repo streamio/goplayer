@@ -24,7 +24,7 @@ package goplayer
       if (kbps > 1024)
         return (kbps / 1024).toFixed(1) + "Mbps"
       else
-        return Math.round(kbps) + "kbps"
+        return Math.round(kbps) + "Kbps"
     }
 
     public static function kbps(value : Number) : Bitrate
