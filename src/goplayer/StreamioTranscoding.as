@@ -28,5 +28,8 @@ package goplayer
 
     public function get dimensions() : Dimensions
     { return new Dimensions(json.width, json.height) }
+
+    public function get playable() : Boolean
+    { return json.state == "ready" }
   }
 }

@@ -72,7 +72,7 @@ package goplayer
       const result : Array = []
 
       for each (var stream : IRTMPStream in streams)
-        if (stream.bitrate.isLessThan(maxBitrate))
+        if (stream.playable && stream.bitrate.isLessThan(maxBitrate))
           result.push(stream)
 
       return result

@@ -5,5 +5,6 @@ package goplayer
     function get name() : String
     function get bitrate() : Bitrate
     function get dimensions() : Dimensions
+    function get playable() : Boolean
   }
 }
