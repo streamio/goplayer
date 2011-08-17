@@ -1,6 +1,6 @@
 package goplayer
 {
-  public class RTMPStreamPicker
+  public class StreamPicker
   {
     // Max bitrate as a fraction of the measured bandwidth.
     public static const BANDWIDTH_FRACTION : Number = .8
@@ -9,10 +9,7 @@ package goplayer
     private var policy : BitratePolicy
     private var bandwidth : Bitrate
 
-    public function RTMPStreamPicker
-      (streams : Array,
-       policy : BitratePolicy,
-       bandwidth : Bitrate)
+    public function StreamPicker(streams : Array, policy : BitratePolicy, bandwidth : Bitrate)
     {
       this.streams = streams
       this.policy = policy

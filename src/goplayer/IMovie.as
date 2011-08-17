@@ -14,6 +14,7 @@ package goplayer
     function get rtmpStreams() : Array
 
     function get httpURL() : URL
+    function get httpStreams() : Array
 
     function get shareURL() : URL
   }

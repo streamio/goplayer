@@ -39,6 +39,9 @@ package goplayer
     public function get httpURL() : URL
     { return hasTranscodings ? bestTranscoding.httpURL : null }
 
+    public function get httpStreams() : Array
+    { return transcodings }
+
     public function get rtmpURL() : URL
     { return hasTranscodings ? bestTranscoding.rtmpURL : null }
 

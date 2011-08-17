@@ -210,12 +210,12 @@ package goplayer
     { stream.playRTMP(streamPicker.first, streamPicker.all) }
 
     private function playHTTPStream() : void
-    { stream.playHTTP(movie.httpURL) }
+    { stream.playHTTP(streamPicker.first["httpURL"]) }
 
-    private function get streamPicker() : RTMPStreamPicker
+    private function get streamPicker() : StreamPicker
     {
-      return new RTMPStreamPicker
-        (movie.rtmpStreams, bitratePolicy, measuredBandwidth)
+      var streams : Array = usingRTMP ? movie.rtmpStreams : movie.httpStreams
+      return new StreamPicker(streams, bitratePolicy, measuredBandwidth)
     }
 
     // -----------------------------------------------------
