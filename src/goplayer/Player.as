@@ -143,7 +143,11 @@ package goplayer
     {
       _usingRTMP = false
       connection.dontConnect()
-      startPlaying()
+
+      if (bandwidthDeterminationNeeded)
+        connection.determineBandwidth()
+      else
+        startPlaying()
     }
 
     public function handleConnectionClosed() : void
@@ -166,6 +170,8 @@ package goplayer
 
     public function handleBandwidthDetermined(bandwidth : Bitrate, latency : Duration) : void
     {
+      debug("Available bandwidth: " + bandwidth + " (" + latency + " latency)")
+
       measuredBandwidth = bandwidth
       measuredLatency = latency
 

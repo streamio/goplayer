@@ -5,6 +5,7 @@ package goplayer
   import flash.media.Video
   import flash.net.NetConnection
   import flash.net.NetStream
+  import streamio.BandwidthChecker
 
   public class StandardFlashNetConnection implements IFlashNetConnection
   {
@@ -17,14 +18,22 @@ package goplayer
     private var dummy : Boolean = false
     private var serverVersion : Number = 0
 
+    private var bandwidthChecker : BandwidthChecker
+
     public function StandardFlashNetConnection(video : Video)
     {
       this.video = video
 
-      connection.addEventListener
-        (NetStatusEvent.NET_STATUS, handleNetConnectionStatus)
-      connection.addEventListener
-        (AsyncErrorEvent.ASYNC_ERROR, handleAsyncError)
+      bandwidthChecker = new BandwidthChecker()
+      bandwidthChecker.onComplete = function(kbps:Number) {
+        _listener.handleBandwidthDetermined(Bitrate.kbps(kbps), Duration.milliseconds(0))
+      }
+      bandwidthChecker.onError = function() {
+        _listener.handleBandwidthDetermined(Bitrate.kbps(0), Duration.milliseconds(0))
+      }
+
+      connection.addEventListener(NetStatusEvent.NET_STATUS, handleNetConnectionStatus)
+      connection.addEventListener(AsyncErrorEvent.ASYNC_ERROR, handleAsyncError)
       connection.client = { onBWCheck: onBWCheck, onBWDone: onBWDone }
     }
 
@@ -53,7 +62,10 @@ package goplayer
     public function determineBandwidth() : void
     {
       debug("Performing bandwidth check...")
-      connection.call("checkBandwidth", null)
+      if(dummy)
+        bandwidthChecker.check()
+      else
+        connection.call("checkBandwidth", null)
     }
 
     private function onBWCheck(... rest : Array) : Number
@@ -65,8 +77,6 @@ package goplayer
 
       const bandwidth : Bitrate = Bitrate.kbps(rest[0])
       const latency : Duration = Duration.milliseconds(rest[3])
-
-      debug("Available bandwidth: " + bandwidth + " (" + latency + " latency)")
 
       _listener.handleBandwidthDetermined(bandwidth, latency)
     }
