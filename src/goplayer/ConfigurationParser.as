@@ -53,7 +53,7 @@ package goplayer
       result.skinURL = getString("skin", DEFAULT_SKIN_URL) + (result.revision.length > 0 ? "?" + result.revision : "")
       result.movieID = getStreamioVideoID()
       result.bitratePolicy = getBitratePolicy("bitrate", BitratePolicy.BEST)
-      result.enableRTMP = getBoolean("enablertmp", true)
+      result.enableRTMP = getBoolean("enablertmp", false)
       result.enableAutoplay = getBoolean("autoplay", false)
       result.enableLooping = getBoolean("loop", false)
       result.externalLoggingFunctionName = getString("externalloggingfunction")
