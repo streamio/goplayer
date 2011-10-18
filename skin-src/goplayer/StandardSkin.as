@@ -23,8 +23,10 @@ package goplayer
     {
       super.update()
 
+      var largePlayButtonDimensions = dimensions.scaledBy(.40).innerSquare
+      if(largePlayButtonDimensions.width > 150) largePlayButtonDimensions = new Dimensions(150, 150)
       setPosition(largePlayButton, dimensions.center)
-      setDimensions(largePlayButton, dimensions.scaledBy(.4).innerSquare)
+      setDimensions(largePlayButton, largePlayButtonDimensions)
 
       setPosition(popupBackground, new Position(0, 0))
       setDimensions(popupBackground, dimensions)
