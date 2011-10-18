@@ -1,5 +1,7 @@
 package goplayer
 {
+  import flash.external.ExternalInterface
+
   public class Configuration
   {
     public var skinURL : String
@@ -28,5 +30,14 @@ package goplayer
     public var trackerID : String
 
     public var pluginConfig : Object
+
+    private static var _protocol : String
+    public static function get protocol() : String
+    {
+      if(_protocol) return _protocol
+      var protocol = ExternalInterface.call("document.location.protocol.toString") || "http:"
+      _protocol = protocol + "//"
+      return _protocol
+    }
   }
 }

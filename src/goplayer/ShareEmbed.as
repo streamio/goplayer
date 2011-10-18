@@ -21,7 +21,7 @@ package goplayer
 
     private function get twitterURL() : String
     {
-      return "http://twitter.com/share?"
+      return "https://twitter.com/share?"
         + "url=" + encodeURIComponent(shareURL) + "&"
         + "text=" + encodeURIComponent(twitterText)
     }
@@ -31,7 +31,7 @@ package goplayer
 
     private function get facebookURL() : String
     {
-      return "http://www.facebook.com/sharer.php?"
+      return "https://www.facebook.com/sharer.php?"
         + "u=" + encodeURIComponent(shareURL) + "&"
         + "t=" + encodeURIComponent(movie.title)
     }

@@ -18,7 +18,7 @@ package goplayer
     { return URL.parse("rtmp://" + json.rtmp_base_uri) }
 
     public function get httpURL() : URL
-    { return URL.parse("http://" + json.http_uri) }
+    { return URL.parse(Configuration.protocol + json.http_uri) }
 
     public function get name() : String
     { return json.rtmp_stream_uri }

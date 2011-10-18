@@ -6,7 +6,6 @@ package goplayer
   public class ConfigurationParser
   {
     public static const DEFAULT_SKIN_URL : String = "goplayer-skin.swf"
-    public static const DEFAULT_STREAMIO_API_URL : String = "http://streamio.com/api"
     public static const DEFAULT_STREAMIO_TRACKER_ID : String = "global"
 
     public static const VALID_PARAMETERS : Array
@@ -70,7 +69,7 @@ package goplayer
       result.enableVolumeControl = getBoolean("skinshowvolumecontrol", true)
       result.enableFullscreenButton = getBoolean("skinshowfullscreenbutton", true)
 
-      result.apiURL = getString("streamioapi", DEFAULT_STREAMIO_API_URL)
+      result.apiURL = getString("streamioapi", Configuration.protocol+"streamio.com/api")
       result.trackerID = getString("streamiotracker", DEFAULT_STREAMIO_TRACKER_ID)
 
       result.pluginConfig = getObject("plugin", { } )
