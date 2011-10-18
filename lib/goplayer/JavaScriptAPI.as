@@ -6,7 +6,7 @@ USAGE:
 
 Inside flash the class is called to dispatch events after initialization.
 
-JavaScriptAPI.initialize() // Run once to prepare the callbacks and send the onPlayerReady event
+JavaScriptAPI.initialize() // Run once to prepare the ExternalInterface and send the onPlayerReady event
 JavaScriptAPI.dispatchEvent("onMessage", {message: "Hello There!"})
 
 Outside flash (javascript in embedding html page) the add/removeEventListener methods are availible.
