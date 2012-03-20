@@ -13,8 +13,6 @@ package goplayer
 
   public class PlayerVideo extends Component
   {
-    private const USE_FULL_SCREEN_SOURCE_RECT : Boolean = false
-
     private const timer : Timer = new Timer(30)
     private const screenshot : ExternalImage = new ExternalImage
     private const listeners : Array = []
@@ -96,9 +94,6 @@ package goplayer
       setBounds(video, videoPosition, videoDimensions)
       setBounds(screenshot, videoPosition, videoDimensions)
 
-      if (stage && USE_FULL_SCREEN_SOURCE_RECT)
-        stage.fullScreenSourceRect = fullScreenSourceRect
-
       for each (var listener : IPlayerVideoUpdateListener in listeners)
         listener.handlePlayerVideoUpdated()
     }
@@ -107,34 +102,16 @@ package goplayer
     { return player.playing || player.paused }
 
     public function get videoPosition() : Position
-    {
-      return legacyFullscreenEnabled
-        ? Position.ZERO
-        : dimensions.minus(videoDimensions).halved.asPosition
-    }
+    { return dimensions.minus(videoDimensions).halved.asPosition }
 
     public function get videoCenter() : Position
     { return videoPosition.plus(videoDimensions.halved) }
 
-    public function get modernFullscreenEnabled() : Boolean
-    { return fullscreenEnabled && !USE_FULL_SCREEN_SOURCE_RECT }
-
-    public function get legacyFullscreenEnabled() : Boolean
-    { return fullscreenEnabled && USE_FULL_SCREEN_SOURCE_RECT }
-
     public function get videoDimensions() : Dimensions
-    {
-      return legacyFullscreenEnabled
-        ? player.highQualityDimensions
-        : dimensions.getInnerDimensions(player.aspectRatio)
-    }
+    { return dimensions.getInnerDimensions(player.aspectRatio) }
 
     override public function get dimensions() : Dimensions
-    {
-      return legacyFullscreenEnabled ? videoDimensions
-        : fullscreenEnabled ? fullscreenDimensions
-        : layoutDimensions
-    }
+    { return fullscreenEnabled ? fullscreenDimensions : layoutDimensions }
 
     private function get fullscreenDimensions() : Dimensions
     { return stage ? $fullscreenDimensions : layoutDimensions }

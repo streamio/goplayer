@@ -149,7 +149,7 @@ package goplayer
     { return video.dimensions.height }
 
     public function get skinScale() : Number
-    { return video.modernFullscreenEnabled ? 2 : 1 }
+    { return video.fullscreenEnabled ? 2 : 1 }
 
     // -----------------------------------------------------
 
