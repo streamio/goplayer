@@ -149,7 +149,7 @@ package goplayer
     { return video.dimensions.height }
 
     public function get skinScale() : Number
-    { return video.fullscreenEnabled ? 2 : 1 }
+    { return 1 } // this used to be 2 in fullscreen mode to increase size of controls
 
     // -----------------------------------------------------
 
