@@ -20,6 +20,7 @@ package goplayer
     function get showVolumeControl() : Boolean
     function get showFullscreenButton() : Boolean
 
+    function get movie() : Object
     function get title() : String
     function get shareURL() : String
     function get embedCode() : String

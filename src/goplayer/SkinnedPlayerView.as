@@ -185,6 +185,9 @@ package goplayer
 
     // -----------------------------------------------------
 
+    public function get movie() : Object
+    { return player.movie }
+
     public function get title() : String
     { return player.movie.title }
 
