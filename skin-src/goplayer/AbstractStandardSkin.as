@@ -153,8 +153,9 @@ package goplayer
 
       onclick(closeShareButton, hidePopups)
       onclick(copyShareLinkButton, handleCopyShareLinkButtonClicked)
-      // onclick(twitterButton, handleTwitterButtonClicked)
-      // onclick(facebookButton, handleFacebookButtonClicked)
+      onclick(twitterButton, handleTwitterButtonClicked)
+      onclick(facebookButton, handleFacebookButtonClicked)
+      onclick(linkedinButton, handleLinkedinButtonClicked)
       
       onclick(closeEmbedButton, hidePopups)
       onclick(copyEmbedCodeButton, handleCopyEmbedCodeButtonClicked)
@@ -225,6 +226,9 @@ package goplayer
 
     private function handleFacebookButtonClicked() : void
     { backend.handleUserShareViaFacebook() }
+    
+    private function handleLinkedinButtonClicked() : void
+    { backend.handleUserShareViaLinkedin() }
 
     // -----------------------------------------------------
 
@@ -327,6 +331,8 @@ package goplayer
     { return undefinedPart("twitterButton") }
     protected function get facebookButton() : DisplayObject
     { return undefinedPart("facebookButton") }
+    protected function get linkedinButton() : DisplayObject
+    { return undefinedPart("linkedinButton") }
 
     protected function get embedPopup() : InteractiveObject
     { return undefinedPart("embedPopup") }

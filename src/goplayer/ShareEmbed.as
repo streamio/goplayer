@@ -15,6 +15,9 @@ package goplayer
 
     public function openFacebook() : void
     { openURL(facebookURL) }
+    
+    public function openLinkedin() : void
+    { openURL(linkedinURL) }
 
     private function openURL(url : String) : void
     { callJavascript("window.open", url, "share") }
@@ -30,11 +33,10 @@ package goplayer
     { return "Check out this video: " + movie.title }
 
     private function get facebookURL() : String
-    {
-      return "https://www.facebook.com/sharer.php?"
-        + "u=" + encodeURIComponent(shareURL) + "&"
-        + "t=" + encodeURIComponent(movie.title)
-    }
+    { return "https://www.facebook.com/sharer.php?u=" + encodeURIComponent(shareURL) }
+
+    private function get linkedinURL() : String
+    { return "http://www.linkedin.com/shareArticle?mini=true&url=" + encodeURIComponent(shareURL) }
 
     public function get shareURL() : String
     { return movie.shareURL.toString() }

@@ -137,6 +137,9 @@ package goplayer
     public function handleUserShareViaFacebook() : void
     { player.openFacebook() }
 
+    public function handleUserShareViaLinkedin() : void
+    { player.openLinkedin() }
+
     public function handleUserCopyEmbedCode() : void
     { player.copyEmbedCode() }
 

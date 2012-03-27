@@ -50,6 +50,7 @@ package goplayer
     function handleUserCopyShareURL() : void
     function handleUserShareViaTwitter() : void
     function handleUserShareViaFacebook() : void
+    function handleUserShareViaLinkedin() : void
     function handleUserCopyEmbedCode() : void
   }
 }

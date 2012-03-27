@@ -530,6 +530,9 @@ package goplayer
 
     public function openFacebook() : void
     { shareEmbed.openFacebook() }
+    
+    public function openLinkedin() : void
+    { shareEmbed.openLinkedin() }
 
     public function copyShareURL() : void
     { shareEmbed.copyShareURL() }

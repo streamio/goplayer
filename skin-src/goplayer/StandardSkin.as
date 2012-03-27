@@ -161,6 +161,8 @@ package goplayer
     { return lookup("sharePopup.twitterButton") }
     override protected function get facebookButton() : DisplayObject
     { return lookup("sharePopup.facebookButton") }
+    override protected function get linkedinButton() : DisplayObject
+    { return lookup("sharePopup.linkedinButton") }
   
     override protected function get closeEmbedButton() : DisplayObject
     { return lookup("embedPopup.closeButton") }
