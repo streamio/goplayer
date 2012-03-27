@@ -7,8 +7,7 @@ package goplayer
 
 	public class StandardSkin extends AbstractStandardSkin
   {
-    private const _bufferingIndicator : BufferingIndicator
-      = new BufferingIndicator
+    private const _bufferingIndicator : BufferingIndicator = new BufferingIndicator
 
     private var _seekBarWidth : Number
 
