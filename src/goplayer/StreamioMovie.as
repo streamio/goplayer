@@ -16,6 +16,9 @@ package goplayer
 
     public function get title() : String
     { return json.title }
+    
+    public function get description() : String
+    { return json.description }
 
     public function get duration() : Duration
     { return Duration.seconds(json.duration) }
