@@ -29,11 +29,9 @@ package goplayer
     public function get imageURL() : URL
     {
       if (json.image)
-        return URL.parse(Configuration.protocol + json.image.normal)
-      else if (json.screenshot)
-        return URL.parse(Configuration.protocol + json.screenshot.normal)
+        return URL.parse(Configuration.protocol + json.image.original)
       else
-        return null
+        return URL.parse(Configuration.protocol + json.screenshot.original)
     }
 
     public function get shareURL() : URL
