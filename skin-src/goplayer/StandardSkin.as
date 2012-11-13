@@ -22,8 +22,8 @@ package goplayer
     {
       super.update()
 
-      var largePlayButtonDimensions = dimensions.scaledBy(.40).innerSquare
-      if(largePlayButtonDimensions.width > 150) largePlayButtonDimensions = new Dimensions(150, 150)
+      var largePlayButtonDimensions = dimensions.scaledBy(.32).innerSquare
+      if(largePlayButtonDimensions.width > 100) largePlayButtonDimensions = new Dimensions(100, 100)
       setPosition(largePlayButton, dimensions.center)
       setDimensions(largePlayButton, largePlayButtonDimensions)
 
