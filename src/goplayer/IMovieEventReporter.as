@@ -4,6 +4,5 @@ package goplayer
   {
     function reportMovieViewed(movieID : String) : void
     function reportMoviePlayed(movieID : String) : void
-    function reportMovieHeatmapData(movieID : String, time : Number) : void
   }
 }

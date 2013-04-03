@@ -31,7 +31,7 @@ package goplayer
 
       JavaScriptAPI.initialize()
 
-      api = new StreamioAPI(configuration.apiURL, new StandardHTTP, configuration.trackerID)
+      api = new StreamioAPI(configuration.apiURL, new StandardHTTP, configuration.channel)
 
       addChild(background)
       addChild(contentLayer)

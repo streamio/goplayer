@@ -6,13 +6,13 @@ package goplayer
 
     private var baseURL : String
     private var http : IHTTP
-    private var trackerID : String
+    private var channel : String
 
-    public function StreamioAPI(baseURL : String, http : IHTTP, trackerID : String)
+    public function StreamioAPI(baseURL : String, http : IHTTP, channel : String)
     {
       this.baseURL = baseURL
       this.http = http
-      this.trackerID = trackerID
+      this.channel = channel
     }
 
     // -----------------------------------------------------
@@ -29,20 +29,14 @@ package goplayer
     public function reportMoviePlayed(movieID : String) : void
     { reportMovieEvent(movieID, "plays", {}) }
     
-    public function reportMovieHeatmapData(movieID : String, time : Number) : void
-    { reportMovieEvent(movieID, "heat", { time: time }) }
-
     private function reportMovieEvent(movieID : String, event : String, parameters : Object) : void
-    {
-      if (trackerID != null && trackerID != "")
-        post(statsPath, getStatsParameters(movieID, event, parameters))
-    }
+    { post(statsPath, getStatsParameters(movieID, event, parameters)) }
 
     private function getStatsParameters(movieID : String, event : String, parameters : Object) : Object
     {
       const result : Object = new Object
 
-      result.tracker_id = trackerID
+      result.channel = channel
       result.video_id = movieID
       result.event = event
 
