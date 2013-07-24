@@ -31,6 +31,7 @@ package goplayer
          "skinshowfullscreenbutton",
 
          "streamioapi",
+         "stok",
          "channel",
 
          "plugin"]
@@ -70,6 +71,7 @@ package goplayer
       result.enableFullscreenButton = getBoolean("skinshowfullscreenbutton", true)
 
       result.apiURL = getString("streamioapi", Configuration.protocol+"streamio.com/api")
+      result.stok = getString("stok")
       result.channel = getString("channel", DEFAULT_STREAMIO_CHANNEL)
 
       result.pluginConfig = getObject("plugin", { } )

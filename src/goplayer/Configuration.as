@@ -27,6 +27,7 @@ package goplayer
     public var enableFullscreenButton : Boolean
 
     public var apiURL : String
+    public var stok : String
     public var channel : String
 
     public var pluginConfig : Object

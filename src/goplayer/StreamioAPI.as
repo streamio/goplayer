@@ -7,18 +7,23 @@ package goplayer
     private var baseURL : String
     private var http : IHTTP
     private var channel : String
+    private var stok : String
 
-    public function StreamioAPI(baseURL : String, http : IHTTP, channel : String)
+    public function StreamioAPI(baseURL : String, http : IHTTP, channel : String, stok : String)
     {
       this.baseURL = baseURL
       this.http = http
       this.channel = channel
+      this.stok = stok
     }
 
     // -----------------------------------------------------
 
     public function fetchMovie(id : String, handler : IMovieHandler) : void
-    { fetch(getJSONMoviePath(id), new MovieJSONHandler(handler, this)) }
+    {
+      var query = stok ? "?stok="+stok : ""
+      fetch(getJSONMoviePath(id)+query, new MovieJSONHandler(handler, this))
+    }
 
     public function getShareMovieURL(id : String) : URL
     { return getURL(getMoviePath(id)) }
