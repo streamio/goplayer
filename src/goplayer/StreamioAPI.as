@@ -27,13 +27,13 @@ package goplayer
 
     public function getShareMovieURL(id : String) : URL
     { return getURL(getMoviePath(id)) }
-    
+
     public function reportMovieViewed(movieID : String) : void
     { reportMovieEvent(movieID, "views", {}) }
-  
+
     public function reportMoviePlayed(movieID : String) : void
     { reportMovieEvent(movieID, "plays", {}) }
-    
+
     private function reportMovieEvent(movieID : String, event : String, parameters : Object) : void
     { post(statsPath, getStatsParameters(movieID, event, parameters)) }
 
@@ -101,7 +101,7 @@ class MovieJSONHandler implements IJSONHandler
   public function MovieJSONHandler
     (handler : IMovieHandler, api : StreamioAPI)
   { this.handler = handler, this.api = api }
-  
+
   public function handleJSON(json : Object) : void
   { handler.handleMovie(new StreamioMovie(json, api)) }
 }
