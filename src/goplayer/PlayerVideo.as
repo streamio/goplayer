@@ -108,7 +108,17 @@ package goplayer
     { return videoPosition.plus(videoDimensions.halved) }
 
     public function get videoDimensions() : Dimensions
-    { return dimensions.getInnerDimensions(player.aspectRatio) }
+    {
+      var vd : Dimensions = dimensions.getInnerDimensions(player.aspectRatio)
+
+      // Avoid decimal values causing <1px letter boxing on slight
+      // player vs video dimensions mismatch.
+
+      vd._width = Math.ceil(vd._width)
+      vd._height = Math.ceil(vd._height)
+
+      return vd
+    }
 
     override public function get dimensions() : Dimensions
     { return fullscreenEnabled ? fullscreenDimensions : layoutDimensions }
