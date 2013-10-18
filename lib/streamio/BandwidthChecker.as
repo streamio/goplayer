@@ -32,7 +32,7 @@ package streamio
 
     public var onComplete:Function
     public var onError:Function
-    public var file:String = Configuration.protocol+"d253c4ja9jigvu.cloudfront.net/assets/bandwidth_checker.mov"
+    public var file:String = Configuration.protocol+"d1gtva7pxdgo0.cloudfront.net/assets/bandwidth_checker.mov"
     public var timeOutDelay:Number = 3000
 
     public function BandwidthChecker()
