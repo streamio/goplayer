@@ -461,7 +461,17 @@ package goplayer
     public function changeVolumeBy(delta : Number) : void
     { volume = volume + delta }
 
-    public function mute() : void
+    public function shadowMute() : void
+	{
+      _volume = 0;
+      savedVolume = volume
+      if (stream)
+        stream.volume = volume
+
+      PluginAPI.volume = volume
+	}
+	
+	public function mute() : void
     {
       savedVolume = volume
       volume = 0

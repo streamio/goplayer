@@ -1,4 +1,4 @@
-package goplayer
+﻿package goplayer
 {
   public class StreamioAPI implements IMovieEventReporter
   {
@@ -8,20 +8,23 @@ package goplayer
     private var http : IHTTP
     private var channel : String
     private var stok : String
+	private var player_id : String
 
-    public function StreamioAPI(baseURL : String, http : IHTTP, channel : String, stok : String)
+    public function StreamioAPI(baseURL : String, http : IHTTP, channel : String, stok : String, player_id : String)
     {
       this.baseURL = baseURL
       this.http = http
       this.channel = channel
       this.stok = stok
+	  this.player_id = player_id
     }
 
     // -----------------------------------------------------
 
     public function fetchMovie(id : String, handler : IMovieHandler) : void
     {
-      var query = stok ? "?stok="+stok : ""
+	  var query = "?player_id=" + this.player_id;	  
+      query = query + (stok ? "&stok="+stok : "")
       fetch(getJSONMoviePath(id)+query, new MovieJSONHandler(handler, this))
     }
 

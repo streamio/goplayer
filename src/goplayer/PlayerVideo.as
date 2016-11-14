@@ -1,7 +1,10 @@
-package goplayer
+﻿package goplayer
 {
   import flash.display.Sprite
   import flash.display.StageDisplayState
+  import flash.display.MovieClip
+  import flash.net.URLRequest
+  import flash.net.navigateToURL
   import flash.events.Event
   import flash.events.FullScreenEvent
   import flash.events.MouseEvent
@@ -15,6 +18,9 @@ package goplayer
   {
     private const timer : Timer = new Timer(30)
     private const screenshot : ExternalImage = new ExternalImage
+    private const watermark : ExternalImage = new ExternalImage
+	private const watermarkContainer : MovieClip = new MovieClip
+
     private const listeners : Array = []
 
     private var player : Player
@@ -29,19 +35,44 @@ package goplayer
 
       addChild(screenshot)
       addChild(video)
+      watermarkContainer.addChild(watermark)
+	  addChild(watermarkContainer)
 
       if (player.movie.imageURL)
         screenshot.url = player.movie.imageURL
+		
+	  if (player.movie.watermarkURL) {
+		watermark.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event) {
+			var watermarkDimensions:Dimensions = new Dimensions(watermark.width, watermark.height)
+			
+			var watermarkPosition:Position = new Position(stage.stageWidth - watermark.width - 10, 10)
+			setBounds(watermark, watermarkPosition, watermarkDimensions)
+			stage.addEventListener(Event.ENTER_FRAME, function(e:Event) {
+				if ( stage ) {
+					var watermarkPosition:Position = new Position(stage.stageWidth - watermark.width - 10, 10)
+					setBounds(watermark, watermarkPosition, watermarkDimensions)
+				}
+			});			
+		})
+        watermark.url = player.movie.watermarkURL
+		if ( player.movie.watermarkLink ) {
+			watermarkContainer.buttonMode = true;
+			watermarkContainer.useHandCursor = true;
+			watermark.addEventListener(MouseEvent.CLICK, function():void {
+				navigateToURL(new URLRequest(player.movie.watermarkLink));
+			})
+		}
+	  }	  
 
-      mouseChildren = false
+      mouseChildren = true
       doubleClickEnabled = true
 
       timer.addEventListener(TimerEvent.TIMER, handleTimerEvent)
       timer.start()
 
       addEventListener(Event.ADDED_TO_STAGE, handleAddedToStage)
-      addEventListener(MouseEvent.CLICK, handleClick)
-      addEventListener(MouseEvent.DOUBLE_CLICK, handleDoubleClick)
+      video.addEventListener(MouseEvent.CLICK, handleClick)
+      video.addEventListener(MouseEvent.DOUBLE_CLICK, handleDoubleClick)
     }
 
     public function addUpdateListener(value : IPlayerVideoUpdateListener) : void
@@ -90,9 +121,9 @@ package goplayer
     override public function update() : void
     {
       video.visible = videoVisible
-
-      setBounds(video, videoPosition, videoDimensions)
+	  setBounds(video, videoPosition, videoDimensions)
       setBounds(screenshot, videoPosition, videoDimensions)
+	  
 
       for each (var listener : IPlayerVideoUpdateListener in listeners)
         listener.handlePlayerVideoUpdated()

@@ -1,4 +1,4 @@
-package goplayer
+﻿package goplayer
 {
   import flash.ui.Keyboard
 
@@ -31,7 +31,7 @@ package goplayer
 
       JavaScriptAPI.initialize()
 
-      api = new StreamioAPI(configuration.apiURL, new StandardHTTP, configuration.channel, configuration.stok)
+      api = new StreamioAPI(configuration.apiURL, new StandardHTTP, configuration.channel, configuration.stok, configuration.playerID)
 
       addChild(background)
       addChild(contentLayer)
@@ -108,6 +108,10 @@ package goplayer
 
       if (configuration.enableAutoplay)
         player.start()
+		
+      if (configuration.startMute)
+        player.shadowMute()
+		
     }
 
     private function logMovieInformation() : void

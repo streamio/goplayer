@@ -7,9 +7,11 @@ package goplayer
     public var skinURL : String
     public var pluginURL : String
     public var movieID : String
+    public var playerID : String
     public var bitratePolicy : BitratePolicy
     public var enableRTMP : Boolean
     public var enableAutoplay : Boolean
+	public var startMute : Boolean
     public var enableLooping : Boolean
     public var externalLoggingFunctionName : String
     public var revision : String

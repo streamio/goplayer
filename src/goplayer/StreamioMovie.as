@@ -26,7 +26,23 @@ package goplayer
     public function get aspectRatio() : Number
     { return json.aspect_ratio_multiplier }
 
-    public function get imageURL() : URL
+    public function get watermarkURL() : URL
+	{
+      if (json.watermark && json.watermark.image)
+        return URL.parse(Configuration.protocol + json.watermark.image)
+	  else
+	    return null
+	}
+	
+	public function get watermarkLink() : String
+	{
+      if (json.watermark && json.watermark.url)
+        return json.watermark.url
+	  else
+	    return null
+	}
+	
+	public function get imageURL() : URL
     {
       if (json.image)
         return URL.parse(Configuration.protocol + json.image.original)

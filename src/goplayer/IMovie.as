@@ -9,6 +9,8 @@ package goplayer
     function get duration() : Duration
     function get aspectRatio() : Number
     function get imageURL() : URL
+    function get watermarkURL() : URL
+    function get watermarkLink() : String
 
     function get rtmpURL() : URL
     function get rtmpStreams() : Array

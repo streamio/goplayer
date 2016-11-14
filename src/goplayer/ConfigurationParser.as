@@ -30,10 +30,13 @@ package goplayer
          "skinshowvolumecontrol",
          "skinshowfullscreenbutton",
 
+         "startmute",
+
          "streamioapi",
          "stok",
          "channel",
-
+         "playerid",
+		 
          "plugin"]
 
     private const result : Configuration = new Configuration
@@ -52,6 +55,7 @@ package goplayer
       result.revision = getString("revision")
       result.skinURL = getString("skin", DEFAULT_SKIN_URL) + (result.revision.length > 0 ? "?" + result.revision : "")
       result.movieID = getStreamioVideoID()
+      result.playerID = getString("playerid")
       result.bitratePolicy = getBitratePolicy("bitrate", BitratePolicy.BEST)
       result.enableRTMP = getBoolean("enablertmp", false)
       result.enableAutoplay = getBoolean("autoplay", false)
@@ -69,6 +73,8 @@ package goplayer
       result.enableTotalTime = getBoolean("skinshowtotaltime", true)
       result.enableVolumeControl = getBoolean("skinshowvolumecontrol", true)
       result.enableFullscreenButton = getBoolean("skinshowfullscreenbutton", true)
+	  
+      result.startMute = getBoolean("startmute", false)
 
       result.apiURL = getString("streamioapi", Configuration.protocol+"streamio.com/api")
       result.stok = getString("stok")
